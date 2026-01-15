@@ -1,0 +1,37 @@
+.prev-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+
+
+}
+
+.prev-card {
+
+    width: 300px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    /* Cor padrão */
+    color: #333;
+
+}
+#prev-header h3 { margin: 0; font-size: 1.5rem; text-transform: capitalize; }
+#prev-header {
+    padding: 20px;
+    text-align: center;
+
+
+}
+
+.prev-footer {
+    background: rgba(255, 255, 255, 0.4);
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            border-top: 1px solid rgba(255,255,255,0.3);
+
+
+}

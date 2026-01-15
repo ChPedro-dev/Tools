@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Previsão - Tools </title>
+	<link rel="icon" href="IMGS/toolbox-solid-full.svg">
+	<!-- Importa o CSS principal -->
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<link rel="stylesheet" href="css/stylePrevCards.css" type="text/css">
+
+	<!-- Importa os ícones do Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+	<div class="container">
+
+		<!-- ===== SIDEBAR ===== -->
+		<aside class="sidebar">
+			<h2><i class="fa-solid fa-chart-line"></i> Tools</h2>
+			<nav>
+				<a href="index.html"><i class="fa-solid fa-house"></i> Home </a>
+				<a href="previsao.html"><i class="fa-solid fa-cloud-sun"></i> Previsao do Tempo </a>
+				<a href="sorteio.html"><i class="fa-solid fa-trophy"></i> Sorteador </a>
+
+			</nav>
+		</aside>
+
+		<!-- ===== CONTEÚDO PRINCIPAL ===== -->
+		<main class="content">
+			<header>
+				<h1>Previsão do Tempo</h1>
+				<p>Ultima Atualização: </p>
+				<p id="horario" onload="RequestTime(event)"></p>
+				<div class="button-panel">
+					<div class="form">
+						<button
+							style="background: #152E7E; background: linear-gradient(360deg, rgba(21, 46, 126, 1) 17%, rgba(32, 68, 183, 1) 62%, rgba(30, 74, 218, 1) 100%);"
+							class="botoes-previsao" type="submit" name="acao" value="LU" onclick="RequestPrev(event)"
+							class="button">
+							LU
+						</button>
+						<button
+							style="background: #e88a1e; background: linear-gradient(360deg, rgba(232, 138, 30, 1) 23%, rgba(232, 171, 30, 1) 66%, rgba(235, 214, 28, 1) 100%);"
+							class="botoes-previsao" type="submit" name="acao" value="BDL" onclick="RequestPrev(event)"
+							class="button">
+							BDL/VOZ
+						</button>
+					</div>
+				</div>
+
+			</header>
+
+			<section class="prev-panel">
+				<button onclick="LoadCards()"> caregar</button>
+				
+			</section>
+
+			<dialog id="loadingPopup">
+				<div class="container-loading">
+					<div class="loading"></div>
+					<p>Carregando dados...</p>
+				</div>
+			</dialog>
+
+
+		</main>
+
+
+
+	</div>
+</body>
+<script src="Scripts/scriptPrev.js"></script>
+</html>

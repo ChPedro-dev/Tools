@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Sorteador - Tools</title>
+  <link rel="icon" href="IMGS/toolbox-solid-full.svg">
+
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+      <h2><i class="fa-solid fa-chart-line"></i>Tools</h2>
+      <nav>
+        <a href="index.html"><i class="fa-solid fa-house"></i> Home </a>
+        <a href="previsao.html"><i class="fa-solid fa-cloud-sun"></i> Previsao do Tempo
+        </a>
+        <a href="sorteio.html"><i class="fa-solid fa-trophy"></i> Sorteador</a>
+      </nav>
+    </aside>
+
+    <!-- ===== CONTEÚDO PRINCIPAL ===== -->
+    <main class="content">
+      <header>
+        <h1 style="padding-bottom:50px;">Sorteio</h1>
+        <div class="sorteio-panel">
+          <form onsubmit="enviar(event)">
+            <input style="max-width: 50%; " type="text" id="link" name="url" placeholder="Url do post do Instagram"
+              required />
+            <button style="background: #9d17e6;
+background: linear-gradient(103deg, rgba(157, 23, 230, 1) 0%, rgba(252, 70, 107, 1) 100%);" class="botoes-previsao"
+              type="submit" class="button">
+              Sortear
+            </button>
+          </form>
+        </div>
+      </header>
+
+      <section>
+
+
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== POPUP ===== -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <h3 id="popupTitulo">Resultado do Sorteio</h3>
+      <div class="info" id="popupMensagem"></div>
+      <button id="fecharPopup">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    const popup = document.getElementById("popup");
+    const popupTitulo = document.getElementById("popupTitulo");
+    const popupMensagem = document.getElementById("popupMensagem");
+    const fecharPopup = document.getElementById("fecharPopup");
+
+    function enviar(event) {
+      event.preventDefault();
+
+      const urlInstagram = document.getElementById("link").value;
+
+      fetch("/sorteio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: urlInstagram }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Erro na requisição: " + response.statusText);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          if (data.usuario !== undefined && data.comentario !== undefined) {
+            // --- SUCESSO ---
+            const html = `
+              <p><strong>Usuário:</strong> ${data.usuario}</p>
+              <p><strong>Comentário:</strong> ${data.comentario}</p>
+            `;
+            popupMensagem.innerHTML = html;
+            popupTitulo.textContent = "Resultado do Sorteio";
+            popup.style.display = "flex";
+          } else {
+            // --- ERRO ---
+            const msgErro =
+              data.erro || "Não foi possível obter um ganhador.";
+            popupMensagem.innerHTML = `<p style='color:red;'>${msgErro}</p>`;
+            popupTitulo.textContent = "Erro";
+            popup.style.display = "flex";
+          }
+        })
+        .catch((error) => {
+          console.error("Erro:", error);
+          popupMensagem.innerHTML =
+            "<p style='color:red;'>Erro de rede ou link inválido.</p>";
+          popupTitulo.textContent = "Erro";
+          popup.style.display = "flex";
+        });
+    }
+
+    fecharPopup.addEventListener("click", () => {
+      popup.style.display = "none";
+    });
+  </script>
+</body>
+
+</html>

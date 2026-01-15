@@ -1,0 +1,4 @@
+/target/
+/.vscode/
+cookies.json
+.DS_Store
