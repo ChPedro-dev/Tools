@@ -14,7 +14,7 @@ import com.pz.api_previsao.model.SorteioInstagram.ServicoSorteio;
 @RestController
 public class ControllerSorteio {
 
-    private static Map<String, List<Comentario>> cacheComentarios = new ConcurrentHashMap<>();
+    private static final Map<String, List<Comentario>> cacheComentarios = new ConcurrentHashMap<>();
 
     @PostMapping("/sorteio")
     public Comentario SorteioInstagram(@RequestBody Map<String, String> body) throws Exception {
