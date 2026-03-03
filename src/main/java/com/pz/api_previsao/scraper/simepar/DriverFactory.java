@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model;
+package com.pz.api_previsao.scraper.simepar;
 
 import java.util.Collections;
 
@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class Driver {
+public class DriverFactory {
     public static WebDriver getDriver() {
 
         ChromeOptions options = new ChromeOptions();

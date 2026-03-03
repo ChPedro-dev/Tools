@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model.Previsao;
+package com.pz.api_previsao.scraper.simepar;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,7 +8,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class Dados {
+import com.pz.api_previsao.util.Normalizacao;
+
+public class DadosScraper {
 
     public boolean checkcaptcha(WebDriver driver) throws InterruptedException {
 
@@ -63,7 +65,7 @@ public class Dados {
         for (int i = 0; i < 5 && i < max.size(); i++) {
             try {
                 maximas[i] = Integer.parseInt(
-                        normalizacao.temp(max.get(i).getText()));
+                        Normalizacao.temp(max.get(i).getText()));
             } catch (Exception e) {
                 maximas[i] = 0;
             }
@@ -84,7 +86,7 @@ public class Dados {
             try {
                 String texto = min.get(i).getText();
                 minimas[i] = Integer.parseInt(
-                        texto.equals("") ? "0" : normalizacao.temp(texto));
+                        texto.equals("") ? "0" : Normalizacao.temp(texto));
             } catch (Exception e) {
                 minimas[i] = 0;
             }

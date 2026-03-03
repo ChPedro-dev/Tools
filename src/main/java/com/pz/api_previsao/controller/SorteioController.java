@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pz.api_previsao.model.SorteioInstagram.Comentario;
-import com.pz.api_previsao.model.SorteioInstagram.ServicoSorteio;
+import com.pz.api_previsao.service.SorteioService;
+import com.pz.api_previsao.model.Comentario;
 
 @RestController
-public class ControllerSorteio {
+public class SorteioController {
+
+    @org.springframework.beans.factory.annotation.Autowired
+    private SorteioService sorteioService;
 
     private static final Map<String, List<Comentario>> cacheComentarios = new ConcurrentHashMap<>();
 
@@ -32,7 +35,7 @@ public class ControllerSorteio {
 
         } else {
 
-            listaDeComentarios = ServicoSorteio.instagram(url);
+            listaDeComentarios = sorteioService.scrapePost(url);
             cacheComentarios.put(url, listaDeComentarios);
 
         }

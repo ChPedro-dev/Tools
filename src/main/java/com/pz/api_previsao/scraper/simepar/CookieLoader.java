@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model;
+package com.pz.api_previsao.scraper.simepar;
 
 import java.io.FileReader;
 import java.lang.reflect.Type;
@@ -21,7 +21,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
  * - O driver deve navegar para o domínio (BASE_URL) antes de addCookie.
  * - Cookies HttpOnly e SameSite podem ter comportamento específico.
  */
-public class LoadCookies {
+public class CookieLoader {
 
     private static final String BASE_URL = "https://www.instagram.com"; // mesma origem dos cookies
     private static final String COOKIES_FILE = "cookies.json";

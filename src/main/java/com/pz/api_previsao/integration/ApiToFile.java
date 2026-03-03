@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model;
+package com.pz.api_previsao.integration;
 
 import java.io.FileWriter;
 import java.io.IOException;

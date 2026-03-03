@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model.SorteioInstagram;
+package com.pz.api_previsao.model;
 
 public class Comentario {
     private int id;

@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model.Previsao;
+package com.pz.api_previsao.integration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

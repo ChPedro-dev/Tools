@@ -6,24 +6,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pz.api_previsao.model.ApiToFile;
-import com.pz.api_previsao.model.Previsao.ServicoPrevisao;
-import com.pz.api_previsao.model.TimerPrevisao;
+import com.pz.api_previsao.service.PrevisaoService;
+import com.pz.api_previsao.util.TimerUtil;
+import com.pz.api_previsao.integration.ApiToFile;
 
 @RestController
 @RequestMapping("/previsao")
-public class ControllerPrevisao {
+public class PrevisaoController {
+    @Autowired
+    ApiToFile File;
+    
+    @Autowired
+    PrevisaoService dados;
 
-    ApiToFile file = new ApiToFile();
-    ServicoPrevisao dados = new ServicoPrevisao();
-    TimerPrevisao timer = new TimerPrevisao();
-
+    @Autowired
+    TimerUtil timer;
+    
     List<Map<String, Object>> dadosCache = new ArrayList();
 
     String acao;
@@ -50,7 +55,7 @@ public class ControllerPrevisao {
 
         dadosCache = listaPrevisao;
 
-        file.convert(url, listaPrevisao);
+        File.convert(url, listaPrevisao);
 
         timer.setUltimaAtualizacao(getTime() + acao);
 

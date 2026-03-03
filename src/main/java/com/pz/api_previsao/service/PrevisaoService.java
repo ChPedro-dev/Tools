@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model.Previsao;
+package com.pz.api_previsao.service;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -11,10 +11,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.pz.api_previsao.model.Driver;
+import com.pz.api_previsao.scraper.simepar.DadosScraper;
+import com.pz.api_previsao.scraper.simepar.DriverFactory;
+import com.pz.api_previsao.util.Normalizacao;
 
-public class ServicoPrevisao {
+@Service
+public class PrevisaoService {
+
+    @Autowired
+    Normalizacao normalizacao;
+
+    @Autowired
+    DadosScraper dados;
 
     private void sleepAleatorio() throws InterruptedException {
         int tempo = ThreadLocalRandom.current().nextInt(3000, 10001);
@@ -23,7 +34,6 @@ public class ServicoPrevisao {
 
     public List<Map<String, Object>> servico(String acao) throws InterruptedException {
 
-        normalizacao norma = new normalizacao();
         Map<String, Integer> cidadeMap = new LinkedHashMap<>();
 
         cidadeMap.put("Paranaguá", 4118204);
@@ -43,9 +53,7 @@ public class ServicoPrevisao {
         cidadeMap.put("Maringá", 4115200);
         cidadeMap.put("Paranavaí", 4118402);
 
-        WebDriver driver = Driver.getDriver();
-
-        Dados dados = new Dados();
+        WebDriver driver = DriverFactory.getDriver();
 
         // lista com TODAS as cidades
         List<Map<String, Object>> listaCidades = new ArrayList<>();
@@ -60,17 +68,21 @@ public class ServicoPrevisao {
             int[] max = dados.maximas(driver);
             int[] min = dados.minimas(driver);
             sleepAleatorio();
+
             String[] icones = dados.icones(driver);
             String[] dia = dados.dia(driver);
             sleepAleatorio();
+
             String[] infos = dados.infos(driver);
             String[] infos2 = dados.infos2(driver);
             sleepAleatorio();
+
             System.out.println("Cidade: " + entry.getKey());
-            sleepAleatorio();
+
             Map<String, Object> cidadeJson = new LinkedHashMap<>();
             cidadeJson.put("cidade", entry.getKey());
             sleepAleatorio();
+
             List<Map<String, Object>> previsoes = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
@@ -80,11 +92,11 @@ public class ServicoPrevisao {
                 diaJson.put("maxima", String.valueOf(max[i]));
                 diaJson.put("minima", String.valueOf(min[i] == 0 ? max[i] - 2 : min[i]));
 
-                norma.setCondicao(icones[i]);
-                diaJson.put("condicao", norma.getCondicao());
+                normalizacao.setCondicao(icones[i]);
+                diaJson.put("condicao", normalizacao.getCondicao());
 
-                norma.setIconeIndex(icones[i]);
-                diaJson.put("index", norma.getIconeIndex());
+                normalizacao.setIconeIndex(icones[i]);
+                diaJson.put("index", normalizacao.getIconeIndex());
 
                 switch (i) {
                     case 0 -> {

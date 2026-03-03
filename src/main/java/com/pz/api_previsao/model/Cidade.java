@@ -1,4 +1,4 @@
-package com.pz.api_previsao.model.Previsao;
+package com.pz.api_previsao.model;
 
 import java.util.HashMap;
 import java.util.Map;
