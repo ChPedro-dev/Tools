@@ -24,11 +24,10 @@ public class ControllerPrevisao {
     ServicoPrevisao dados = new ServicoPrevisao();
     TimerPrevisao timer = new TimerPrevisao();
 
-    List<Map<String,Object>> dadosCache = new ArrayList() ;
-
+    List<Map<String, Object>> dadosCache = new ArrayList();
 
     String acao;
-    // String url = "/home/pedro/Documentos/dados.json";
+    String url = "/home/pedro/Documentos/dados.json";
     String caminhoPasta = "/mnt/dados-windows/PREVISAO DO TEMPO/JSON/dados.json";
 
     private String getTime() {
@@ -40,20 +39,20 @@ public class ControllerPrevisao {
     }
 
     @GetMapping("/cache")
-    public List<Map<String,Object>> CacheDados(){
-            return dadosCache;
+    public List<Map<String, Object>> CacheDados() {
+        return dadosCache;
     }
 
     @PostMapping("/scrap")
     public List<Map<String, Object>> Previsao(@RequestParam(name = "acao") String acao) throws InterruptedException {
-
+        
         List<Map<String, Object>> listaPrevisao = dados.servico(acao);
 
-       dadosCache = listaPrevisao;
+        dadosCache = listaPrevisao;
 
-        file.convert(caminhoPasta, listaPrevisao);
+        file.convert(url, listaPrevisao);
 
-        timer.setUltimaAtualizacao(getTime() + acao );
+        timer.setUltimaAtualizacao(getTime() + acao);
 
         return listaPrevisao;
 

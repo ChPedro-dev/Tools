@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.pz.api_previsao.model.Driver;
 
 public class ServicoPrevisao {
+
+    private void sleepAleatorio() throws InterruptedException {
+        int tempo = ThreadLocalRandom.current().nextInt(3000, 10001);
+        Thread.sleep(tempo);
+    }
 
     public List<Map<String, Object>> servico(String acao) throws InterruptedException {
 
@@ -48,21 +54,23 @@ public class ServicoPrevisao {
 
             driver.get("https://www.simepar.br/simepar/forecast_by_counties/" + entry.getValue());
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(0, 5));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5, 8));
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("did-data")));
 
             int[] max = dados.maximas(driver);
             int[] min = dados.minimas(driver);
+            sleepAleatorio();
             String[] icones = dados.icones(driver);
             String[] dia = dados.dia(driver);
-
+            sleepAleatorio();
             String[] infos = dados.infos(driver);
             String[] infos2 = dados.infos2(driver);
+            sleepAleatorio();
             System.out.println("Cidade: " + entry.getKey());
-
+            sleepAleatorio();
             Map<String, Object> cidadeJson = new LinkedHashMap<>();
             cidadeJson.put("cidade", entry.getKey());
-
+            sleepAleatorio();
             List<Map<String, Object>> previsoes = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
