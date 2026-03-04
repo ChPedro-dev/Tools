@@ -7,9 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.stereotype.Component;
 
 import com.pz.api_previsao.util.Normalizacao;
 
+@Component
 public class DadosScraper {
 
     public boolean checkcaptcha(WebDriver driver) throws InterruptedException {

@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Component
 public class ApiToFile {
-
+    
     public void convert(String caminho, List<Map<String, Object>> dados) {
         try {
             // Instancia o ObjectMapper

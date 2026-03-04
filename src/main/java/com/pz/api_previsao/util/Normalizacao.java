@@ -1,5 +1,8 @@
 package com.pz.api_previsao.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Normalizacao {
 
     String condicao;
