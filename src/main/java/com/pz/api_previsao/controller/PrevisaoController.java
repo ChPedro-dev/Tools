@@ -34,6 +34,7 @@ public class PrevisaoController {
     String acao;
     String url = "/home/pedro/Documentos/dados.json";
     String caminhoPasta = "/mnt/dados-windows/PREVISAO DO TEMPO/JSON/dados.json";
+    String caminhoProjeto = "/home/pedro/Documentos/mnt/dados.json";
 
     private String getTime() {
 
@@ -53,9 +54,9 @@ public class PrevisaoController {
         
         List<Map<String, Object>> listaPrevisao = dados.servico(acao);
 
-        dadosCache = listaPrevisao;
+        dadosCache = listaPrevisao; 
 
-        File.convert(url, listaPrevisao);
+        File.convert(caminhoProjeto, listaPrevisao);
 
         timer.setUltimaAtualizacao(getTime() + acao);
 

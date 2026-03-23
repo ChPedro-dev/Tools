@@ -34,14 +34,14 @@ public class DadosScraper {
     }
 
     private void sleepAleatorio() throws InterruptedException {
-        int tempo = ThreadLocalRandom.current().nextInt(3000, 10001);
+        int tempo = ThreadLocalRandom.current().nextInt(3000, 7001);
         Thread.sleep(tempo);
     }
 
     public String[] dia(WebDriver driver) throws InterruptedException {
         String[] dia = new String[5];
 
-        sleepAleatorio();
+       
         for (int i = 0; i < 5; i++) {
             List<WebElement> elementos = driver.findElements(
                     By.cssSelector("#linkDia_" + i + " > span"));
@@ -58,7 +58,6 @@ public class DadosScraper {
 
     public int[] maximas(WebDriver driver) throws InterruptedException {
 
-        sleepAleatorio();
         List<WebElement> max = driver.findElements(By.cssSelector(
                 "g.highcharts-data-labels.highcharts-series-0.highcharts-line-series >g > text> tspan.highcharts-text-outline"));
 
@@ -78,7 +77,7 @@ public class DadosScraper {
 
     public int[] minimas(WebDriver driver) throws InterruptedException {
 
-        sleepAleatorio();
+
         List<WebElement> min = driver.findElements(By.cssSelector(
                 "g.highcharts-data-labels.highcharts-series-1.highcharts-line-series > g > text > tspan.highcharts-text-outline"));
 
@@ -98,7 +97,6 @@ public class DadosScraper {
     }
 
     public String[] infos(WebDriver driver) throws InterruptedException {
-        sleepAleatorio();
 
         String[] inf = new String[3];
 
@@ -125,7 +123,6 @@ public class DadosScraper {
 
     public String[] infos2(WebDriver driver) throws InterruptedException {
 
-        sleepAleatorio();
 
         String[] inf = new String[3];
 
@@ -161,7 +158,7 @@ public class DadosScraper {
     public String[] icones(WebDriver driver) throws InterruptedException {
         String[] id = new String[5];
 
-        sleepAleatorio();
+        
 
         for (int i = 0; i < 5; i++) {
             List<WebElement> icones = driver.findElements(

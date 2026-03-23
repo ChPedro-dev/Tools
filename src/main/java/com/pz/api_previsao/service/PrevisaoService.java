@@ -1,16 +1,12 @@
 package com.pz.api_previsao.service;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +24,7 @@ public class PrevisaoService {
     DadosScraper dados;
 
     private void sleepAleatorio() throws InterruptedException {
-        int tempo = ThreadLocalRandom.current().nextInt(3000, 10001);
+        int tempo = ThreadLocalRandom.current().nextInt(3000, 5000);
         Thread.sleep(tempo);
     }
 
@@ -62,26 +58,28 @@ public class PrevisaoService {
 
             driver.get("https://www.simepar.br/simepar/forecast_by_counties/" + entry.getValue());
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5, 8));
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.className("did-data")));
+            System.out.println("Cidade: " + entry.getKey());
+            
+            Thread.sleep(15000); // espera a página carregar
 
             int[] max = dados.maximas(driver);
             int[] min = dados.minimas(driver);
-            sleepAleatorio();
-
+            
             String[] icones = dados.icones(driver);
             String[] dia = dados.dia(driver);
-            sleepAleatorio();
-
+            
             String[] infos = dados.infos(driver);
-            String[] infos2 = dados.infos2(driver);
-            sleepAleatorio();
+            String[] infos2;
 
-            System.out.println("Cidade: " + entry.getKey());
-
+            if(acao.equals("LU")){
+                infos2 = dados.infos2(driver);
+            }else{
+                infos2 = new String[]{"", "", ""};
+            }
+            
             Map<String, Object> cidadeJson = new LinkedHashMap<>();
             cidadeJson.put("cidade", entry.getKey());
-            sleepAleatorio();
+           
 
             List<Map<String, Object>> previsoes = new ArrayList<>();
 
@@ -121,6 +119,11 @@ public class PrevisaoService {
             cidadeJson.put("previsoes", previsoes);
             listaCidades.add(cidadeJson); // adiciona cidade na lista
 
+            sleepAleatorio();
+
+            System.out.println("-----------------------------");
+            System.out.println(cidadeJson.get(previsoes.get(0).get("dia")) + " - " + cidadeJson.get("cidade") + " - " + cidadeJson.get("previsoes"));
+            
             if (acao.equals("BDL") && entry.getKey().equals("Fazenda Rio Grande") == true) {
                 break;
             }
