@@ -8,10 +8,6 @@ public class Normalizacao {
     String condicao;
     long iconeIndex;
 
-    public long getIconeIndex() {
-        return iconeIndex;
-    }
-
     public void setIconeIndex(String condicao) {
         switch (condicao) {
             case "Céu claro" ->
@@ -31,10 +27,14 @@ public class Normalizacao {
         }
     }
 
+    public long getIconeIndex() {
+        return iconeIndex;
+    }
+    
     public String getCondicao() {
         return condicao;
     }
-
+    
     public void setCondicao(String condicao) {
 
         switch (condicao) {
@@ -44,7 +44,7 @@ public class Normalizacao {
             default:
                 this.condicao = condicao;
         }
-    }
+    }   
 
     public static String temp(String temp) {
 

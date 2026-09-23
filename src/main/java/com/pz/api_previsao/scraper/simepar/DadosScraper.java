@@ -10,14 +10,21 @@ import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Component;
 
 import com.pz.api_previsao.util.Normalizacao;
+import com.pz.api_previsao.util.SleepAleatorio;
 
 @Component
 public class DadosScraper {
+    
+    final SleepAleatorio sleepAleatorio;
+
+    DadosScraper(SleepAleatorio sleep){
+        this.sleepAleatorio = sleep;
+    }
 
     public boolean checkcaptcha(WebDriver driver) throws InterruptedException {
 
         driver.get("https://www.simepar.br");
-        Thread.sleep(20000);
+        Thread.sleep(15000);
         try {
             WebElement titulo = driver.findElement(
                     By.cssSelector("body > div > div.container.cc > div:nth-child(1) > div > h2 > a")
@@ -31,11 +38,6 @@ public class DadosScraper {
         } catch (Exception e) {
             throw new RuntimeException("Captcha detectado ou elemento não encontrado.");
         }
-    }
-
-    private void sleepAleatorio() throws InterruptedException {
-        int tempo = ThreadLocalRandom.current().nextInt(3000, 7001);
-        Thread.sleep(tempo);
     }
 
     public String[] dia(WebDriver driver) throws InterruptedException {
@@ -132,7 +134,7 @@ public class DadosScraper {
 
             JavascriptExecutor js = (JavascriptExecutor) driver;
 
-            sleepAleatorio();
+            sleepAleatorio.sleep();
             js.executeScript("arguments[0].click();", botao);
 
             WebElement precipitacao = driver.findElement(By.cssSelector(

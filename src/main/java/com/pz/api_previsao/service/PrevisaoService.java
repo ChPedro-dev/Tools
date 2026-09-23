@@ -4,28 +4,24 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
-
 import org.openqa.selenium.WebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.pz.api_previsao.scraper.simepar.DadosScraper;
 import com.pz.api_previsao.scraper.simepar.DriverFactory;
 import com.pz.api_previsao.util.Normalizacao;
+import com.pz.api_previsao.util.SleepAleatorio;
 
 @Service
 public class PrevisaoService {
 
-    @Autowired
-    Normalizacao normalizacao;
+    final Normalizacao normalizacao;
+    final DadosScraper dados;
+    final SleepAleatorio sleepAleatorio;
 
-    @Autowired
-    DadosScraper dados;
-
-    private void sleepAleatorio() throws InterruptedException {
-        int tempo = ThreadLocalRandom.current().nextInt(3000, 5000);
-        Thread.sleep(tempo);
+    PrevisaoService(Normalizacao normalizacao, DadosScraper dados, SleepAleatorio sleep) {
+        this.normalizacao = normalizacao;
+        this.dados = dados;
+        this.sleepAleatorio = sleep;
     }
 
     public List<Map<String, Object>> servico(String acao) throws InterruptedException {
@@ -119,7 +115,7 @@ public class PrevisaoService {
             cidadeJson.put("previsoes", previsoes);
             listaCidades.add(cidadeJson); // adiciona cidade na lista
 
-            sleepAleatorio();
+            sleepAleatorio.sleep();
 
             System.out.println("-----------------------------");
             System.out.println(cidadeJson.get(previsoes.get(0).get("dia")) + " - " + cidadeJson.get("cidade") + " - " + cidadeJson.get("previsoes"));
