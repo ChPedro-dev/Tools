@@ -1,0 +1,1997 @@
+[
+  {
+    "id": 4100103,
+    "nome": "Abatiá",
+    "busca": "abatia"
+  },
+  {
+    "id": 4100202,
+    "nome": "Adrianópolis",
+    "busca": "adrianopolis"
+  },
+  {
+    "id": 4100301,
+    "nome": "Agudos do Sul",
+    "busca": "agudos do sul"
+  },
+  {
+    "id": 4100400,
+    "nome": "Almirante Tamandaré",
+    "busca": "almirante tamandare"
+  },
+  {
+    "id": 4100459,
+    "nome": "Altamira do Paraná",
+    "busca": "altamira do parana"
+  },
+  {
+    "id": 4100509,
+    "nome": "Altônia",
+    "busca": "altonia"
+  },
+  {
+    "id": 4100608,
+    "nome": "Alto Paraná",
+    "busca": "alto parana"
+  },
+  {
+    "id": 4100707,
+    "nome": "Alto Piquiri",
+    "busca": "alto piquiri"
+  },
+  {
+    "id": 4100806,
+    "nome": "Alvorada do Sul",
+    "busca": "alvorada do sul"
+  },
+  {
+    "id": 4100905,
+    "nome": "Amaporã",
+    "busca": "amapora"
+  },
+  {
+    "id": 4101002,
+    "nome": "Ampére",
+    "busca": "ampere"
+  },
+  {
+    "id": 4101051,
+    "nome": "Anahy",
+    "busca": "anahy"
+  },
+  {
+    "id": 4101101,
+    "nome": "Andirá",
+    "busca": "andira"
+  },
+  {
+    "id": 4101150,
+    "nome": "Ângulo",
+    "busca": "angulo"
+  },
+  {
+    "id": 4101200,
+    "nome": "Antonina",
+    "busca": "antonina"
+  },
+  {
+    "id": 4101309,
+    "nome": "Antônio Olinto",
+    "busca": "antonio olinto"
+  },
+  {
+    "id": 4101408,
+    "nome": "Apucarana",
+    "busca": "apucarana"
+  },
+  {
+    "id": 4101507,
+    "nome": "Arapongas",
+    "busca": "arapongas"
+  },
+  {
+    "id": 4101606,
+    "nome": "Arapoti",
+    "busca": "arapoti"
+  },
+  {
+    "id": 4101655,
+    "nome": "Arapuã",
+    "busca": "arapua"
+  },
+  {
+    "id": 4101705,
+    "nome": "Araruna",
+    "busca": "araruna"
+  },
+  {
+    "id": 4101804,
+    "nome": "Araucária",
+    "busca": "araucaria"
+  },
+  {
+    "id": 4101853,
+    "nome": "Ariranha do Ivaí",
+    "busca": "ariranha do ivai"
+  },
+  {
+    "id": 4101903,
+    "nome": "Assaí",
+    "busca": "assai"
+  },
+  {
+    "id": 4102000,
+    "nome": "Assis Chateaubriand",
+    "busca": "assis chateaubriand"
+  },
+  {
+    "id": 4102109,
+    "nome": "Astorga",
+    "busca": "astorga"
+  },
+  {
+    "id": 4102208,
+    "nome": "Atalaia",
+    "busca": "atalaia"
+  },
+  {
+    "id": 4102307,
+    "nome": "Balsa Nova",
+    "busca": "balsa nova"
+  },
+  {
+    "id": 4102406,
+    "nome": "Bandeirantes",
+    "busca": "bandeirantes"
+  },
+  {
+    "id": 4102505,
+    "nome": "Barbosa Ferraz",
+    "busca": "barbosa ferraz"
+  },
+  {
+    "id": 4102604,
+    "nome": "Barracão",
+    "busca": "barracao"
+  },
+  {
+    "id": 4102703,
+    "nome": "Barra do Jacaré",
+    "busca": "barra do jacare"
+  },
+  {
+    "id": 4102752,
+    "nome": "Bela Vista da Caroba",
+    "busca": "bela vista da caroba"
+  },
+  {
+    "id": 4102802,
+    "nome": "Bela Vista do Paraíso",
+    "busca": "bela vista do paraiso"
+  },
+  {
+    "id": 4102901,
+    "nome": "Bituruna",
+    "busca": "bituruna"
+  },
+  {
+    "id": 4103008,
+    "nome": "Boa Esperança",
+    "busca": "boa esperanca"
+  },
+  {
+    "id": 4103024,
+    "nome": "Boa Esperança do Iguaçu",
+    "busca": "boa esperanca do iguacu"
+  },
+  {
+    "id": 4103040,
+    "nome": "Boa Ventura de São Roque",
+    "busca": "boa ventura de sao roque"
+  },
+  {
+    "id": 4103057,
+    "nome": "Boa Vista da Aparecida",
+    "busca": "boa vista da aparecida"
+  },
+  {
+    "id": 4103107,
+    "nome": "Bocaiúva do Sul",
+    "busca": "bocaiuva do sul"
+  },
+  {
+    "id": 4103156,
+    "nome": "Bom Jesus do Sul",
+    "busca": "bom jesus do sul"
+  },
+  {
+    "id": 4103206,
+    "nome": "Bom Sucesso",
+    "busca": "bom sucesso"
+  },
+  {
+    "id": 4103222,
+    "nome": "Bom Sucesso do Sul",
+    "busca": "bom sucesso do sul"
+  },
+  {
+    "id": 4103305,
+    "nome": "Borrazópolis",
+    "busca": "borrazopolis"
+  },
+  {
+    "id": 4103354,
+    "nome": "Braganey",
+    "busca": "braganey"
+  },
+  {
+    "id": 4103370,
+    "nome": "Brasilândia do Sul",
+    "busca": "brasilandia do sul"
+  },
+  {
+    "id": 4103404,
+    "nome": "Cafeara",
+    "busca": "cafeara"
+  },
+  {
+    "id": 4103453,
+    "nome": "Cafelândia",
+    "busca": "cafelandia"
+  },
+  {
+    "id": 4103479,
+    "nome": "Cafezal do Sul",
+    "busca": "cafezal do sul"
+  },
+  {
+    "id": 4103503,
+    "nome": "Califórnia",
+    "busca": "california"
+  },
+  {
+    "id": 4103602,
+    "nome": "Cambará",
+    "busca": "cambara"
+  },
+  {
+    "id": 4103701,
+    "nome": "Cambé",
+    "busca": "cambe"
+  },
+  {
+    "id": 4103800,
+    "nome": "Cambira",
+    "busca": "cambira"
+  },
+  {
+    "id": 4103909,
+    "nome": "Campina da Lagoa",
+    "busca": "campina da lagoa"
+  },
+  {
+    "id": 4103958,
+    "nome": "Campina do Simão",
+    "busca": "campina do simao"
+  },
+  {
+    "id": 4104006,
+    "nome": "Campina Grande do Sul",
+    "busca": "campina grande do sul"
+  },
+  {
+    "id": 4104055,
+    "nome": "Campo Bonito",
+    "busca": "campo bonito"
+  },
+  {
+    "id": 4104105,
+    "nome": "Campo do Tenente",
+    "busca": "campo do tenente"
+  },
+  {
+    "id": 4104204,
+    "nome": "Campo Largo",
+    "busca": "campo largo"
+  },
+  {
+    "id": 4104253,
+    "nome": "Campo Magro",
+    "busca": "campo magro"
+  },
+  {
+    "id": 4104303,
+    "nome": "Campo Mourão",
+    "busca": "campo mourao"
+  },
+  {
+    "id": 4104402,
+    "nome": "Cândido de Abreu",
+    "busca": "candido de abreu"
+  },
+  {
+    "id": 4104428,
+    "nome": "Candói",
+    "busca": "candoi"
+  },
+  {
+    "id": 4104451,
+    "nome": "Cantagalo",
+    "busca": "cantagalo"
+  },
+  {
+    "id": 4104501,
+    "nome": "Capanema",
+    "busca": "capanema"
+  },
+  {
+    "id": 4104600,
+    "nome": "Capitão Leônidas Marques",
+    "busca": "capitao leonidas marques"
+  },
+  {
+    "id": 4104659,
+    "nome": "Carambeí",
+    "busca": "carambei"
+  },
+  {
+    "id": 4104709,
+    "nome": "Carlópolis",
+    "busca": "carlopolis"
+  },
+  {
+    "id": 4104808,
+    "nome": "Cascavel",
+    "busca": "cascavel"
+  },
+  {
+    "id": 4104907,
+    "nome": "Castro",
+    "busca": "castro"
+  },
+  {
+    "id": 4105003,
+    "nome": "Catanduvas",
+    "busca": "catanduvas"
+  },
+  {
+    "id": 4105102,
+    "nome": "Centenário do Sul",
+    "busca": "centenario do sul"
+  },
+  {
+    "id": 4105201,
+    "nome": "Cerro Azul",
+    "busca": "cerro azul"
+  },
+  {
+    "id": 4105300,
+    "nome": "Céu Azul",
+    "busca": "ceu azul"
+  },
+  {
+    "id": 4105409,
+    "nome": "Chopinzinho",
+    "busca": "chopinzinho"
+  },
+  {
+    "id": 4105508,
+    "nome": "Cianorte",
+    "busca": "cianorte"
+  },
+  {
+    "id": 4105607,
+    "nome": "Cidade Gaúcha",
+    "busca": "cidade gaucha"
+  },
+  {
+    "id": 4105706,
+    "nome": "Clevelândia",
+    "busca": "clevelandia"
+  },
+  {
+    "id": 4105805,
+    "nome": "Colombo",
+    "busca": "colombo"
+  },
+  {
+    "id": 4105904,
+    "nome": "Colorado",
+    "busca": "colorado"
+  },
+  {
+    "id": 4106001,
+    "nome": "Congonhinhas",
+    "busca": "congonhinhas"
+  },
+  {
+    "id": 4106100,
+    "nome": "Conselheiro Mairinck",
+    "busca": "conselheiro mairinck"
+  },
+  {
+    "id": 4106209,
+    "nome": "Contenda",
+    "busca": "contenda"
+  },
+  {
+    "id": 4106308,
+    "nome": "Corbélia",
+    "busca": "corbelia"
+  },
+  {
+    "id": 4106407,
+    "nome": "Cornélio Procópio",
+    "busca": "cornelio procopio"
+  },
+  {
+    "id": 4106456,
+    "nome": "Coronel Domingos Soares",
+    "busca": "coronel domingos soares"
+  },
+  {
+    "id": 4106506,
+    "nome": "Coronel Vivida",
+    "busca": "coronel vivida"
+  },
+  {
+    "id": 4106555,
+    "nome": "Corumbataí do Sul",
+    "busca": "corumbatai do sul"
+  },
+  {
+    "id": 4106571,
+    "nome": "Cruzeiro do Iguaçu",
+    "busca": "cruzeiro do iguacu"
+  },
+  {
+    "id": 4106605,
+    "nome": "Cruzeiro do Oeste",
+    "busca": "cruzeiro do oeste"
+  },
+  {
+    "id": 4106704,
+    "nome": "Cruzeiro do Sul",
+    "busca": "cruzeiro do sul"
+  },
+  {
+    "id": 4106803,
+    "nome": "Cruz Machado",
+    "busca": "cruz machado"
+  },
+  {
+    "id": 4106852,
+    "nome": "Cruzmaltina",
+    "busca": "cruzmaltina"
+  },
+  {
+    "id": 4106902,
+    "nome": "Curitiba",
+    "busca": "curitiba"
+  },
+  {
+    "id": 4107009,
+    "nome": "Curiúva",
+    "busca": "curiuva"
+  },
+  {
+    "id": 4107108,
+    "nome": "Diamante do Norte",
+    "busca": "diamante do norte"
+  },
+  {
+    "id": 4107124,
+    "nome": "Diamante do Sul",
+    "busca": "diamante do sul"
+  },
+  {
+    "id": 4107157,
+    "nome": "Diamante D'Oeste",
+    "busca": "diamante d'oeste"
+  },
+  {
+    "id": 4107207,
+    "nome": "Dois Vizinhos",
+    "busca": "dois vizinhos"
+  },
+  {
+    "id": 4107256,
+    "nome": "Douradina",
+    "busca": "douradina"
+  },
+  {
+    "id": 4107306,
+    "nome": "Doutor Camargo",
+    "busca": "doutor camargo"
+  },
+  {
+    "id": 4107405,
+    "nome": "Enéas Marques",
+    "busca": "eneas marques"
+  },
+  {
+    "id": 4107504,
+    "nome": "Engenheiro Beltrão",
+    "busca": "engenheiro beltrao"
+  },
+  {
+    "id": 4107520,
+    "nome": "Esperança Nova",
+    "busca": "esperanca nova"
+  },
+  {
+    "id": 4107538,
+    "nome": "Entre Rios do Oeste",
+    "busca": "entre rios do oeste"
+  },
+  {
+    "id": 4107546,
+    "nome": "Espigão Alto do Iguaçu",
+    "busca": "espigao alto do iguacu"
+  },
+  {
+    "id": 4107553,
+    "nome": "Farol",
+    "busca": "farol"
+  },
+  {
+    "id": 4107603,
+    "nome": "Faxinal",
+    "busca": "faxinal"
+  },
+  {
+    "id": 4107652,
+    "nome": "Fazenda Rio Grande",
+    "busca": "fazenda rio grande"
+  },
+  {
+    "id": 4107702,
+    "nome": "Fênix",
+    "busca": "fenix"
+  },
+  {
+    "id": 4107736,
+    "nome": "Fernandes Pinheiro",
+    "busca": "fernandes pinheiro"
+  },
+  {
+    "id": 4107751,
+    "nome": "Figueira",
+    "busca": "figueira"
+  },
+  {
+    "id": 4107801,
+    "nome": "Floraí",
+    "busca": "florai"
+  },
+  {
+    "id": 4107850,
+    "nome": "Flor da Serra do Sul",
+    "busca": "flor da serra do sul"
+  },
+  {
+    "id": 4107900,
+    "nome": "Floresta",
+    "busca": "floresta"
+  },
+  {
+    "id": 4108007,
+    "nome": "Florestópolis",
+    "busca": "florestopolis"
+  },
+  {
+    "id": 4108106,
+    "nome": "Flórida",
+    "busca": "florida"
+  },
+  {
+    "id": 4108205,
+    "nome": "Formosa do Oeste",
+    "busca": "formosa do oeste"
+  },
+  {
+    "id": 4108304,
+    "nome": "Foz do Iguaçu",
+    "busca": "foz do iguacu"
+  },
+  {
+    "id": 4108320,
+    "nome": "Francisco Alves",
+    "busca": "francisco alves"
+  },
+  {
+    "id": 4108403,
+    "nome": "Francisco Beltrão",
+    "busca": "francisco beltrao"
+  },
+  {
+    "id": 4108452,
+    "nome": "Foz do Jordão",
+    "busca": "foz do jordao"
+  },
+  {
+    "id": 4108502,
+    "nome": "General Carneiro",
+    "busca": "general carneiro"
+  },
+  {
+    "id": 4108551,
+    "nome": "Godoy Moreira",
+    "busca": "godoy moreira"
+  },
+  {
+    "id": 4108601,
+    "nome": "Goioerê",
+    "busca": "goioere"
+  },
+  {
+    "id": 4108650,
+    "nome": "Goioxim",
+    "busca": "goioxim"
+  },
+  {
+    "id": 4108700,
+    "nome": "Grandes Rios",
+    "busca": "grandes rios"
+  },
+  {
+    "id": 4108809,
+    "nome": "Guaíra",
+    "busca": "guaira"
+  },
+  {
+    "id": 4108908,
+    "nome": "Guairaçá",
+    "busca": "guairaca"
+  },
+  {
+    "id": 4108957,
+    "nome": "Guamiranga",
+    "busca": "guamiranga"
+  },
+  {
+    "id": 4109005,
+    "nome": "Guapirama",
+    "busca": "guapirama"
+  },
+  {
+    "id": 4109104,
+    "nome": "Guaporema",
+    "busca": "guaporema"
+  },
+  {
+    "id": 4109203,
+    "nome": "Guaraci",
+    "busca": "guaraci"
+  },
+  {
+    "id": 4109302,
+    "nome": "Guaraniaçu",
+    "busca": "guaraniacu"
+  },
+  {
+    "id": 4109401,
+    "nome": "Guarapuava",
+    "busca": "guarapuava"
+  },
+  {
+    "id": 4109500,
+    "nome": "Guaraqueçaba",
+    "busca": "guaraquecaba"
+  },
+  {
+    "id": 4109609,
+    "nome": "Guaratuba",
+    "busca": "guaratuba"
+  },
+  {
+    "id": 4109658,
+    "nome": "Honório Serpa",
+    "busca": "honorio serpa"
+  },
+  {
+    "id": 4109708,
+    "nome": "Ibaiti",
+    "busca": "ibaiti"
+  },
+  {
+    "id": 4109757,
+    "nome": "Ibema",
+    "busca": "ibema"
+  },
+  {
+    "id": 4109807,
+    "nome": "Ibiporã",
+    "busca": "ibipora"
+  },
+  {
+    "id": 4109906,
+    "nome": "Icaraíma",
+    "busca": "icaraima"
+  },
+  {
+    "id": 4110003,
+    "nome": "Iguaraçu",
+    "busca": "iguaracu"
+  },
+  {
+    "id": 4110052,
+    "nome": "Iguatu",
+    "busca": "iguatu"
+  },
+  {
+    "id": 4110078,
+    "nome": "Imbaú",
+    "busca": "imbau"
+  },
+  {
+    "id": 4110102,
+    "nome": "Imbituva",
+    "busca": "imbituva"
+  },
+  {
+    "id": 4110201,
+    "nome": "Inácio Martins",
+    "busca": "inacio martins"
+  },
+  {
+    "id": 4110300,
+    "nome": "Inajá",
+    "busca": "inaja"
+  },
+  {
+    "id": 4110409,
+    "nome": "Indianópolis",
+    "busca": "indianopolis"
+  },
+  {
+    "id": 4110508,
+    "nome": "Ipiranga",
+    "busca": "ipiranga"
+  },
+  {
+    "id": 4110607,
+    "nome": "Iporã",
+    "busca": "ipora"
+  },
+  {
+    "id": 4110656,
+    "nome": "Iracema do Oeste",
+    "busca": "iracema do oeste"
+  },
+  {
+    "id": 4110706,
+    "nome": "Irati",
+    "busca": "irati"
+  },
+  {
+    "id": 4110805,
+    "nome": "Iretama",
+    "busca": "iretama"
+  },
+  {
+    "id": 4110904,
+    "nome": "Itaguajé",
+    "busca": "itaguaje"
+  },
+  {
+    "id": 4110953,
+    "nome": "Itaipulândia",
+    "busca": "itaipulandia"
+  },
+  {
+    "id": 4111001,
+    "nome": "Itambaracá",
+    "busca": "itambaraca"
+  },
+  {
+    "id": 4111100,
+    "nome": "Itambé",
+    "busca": "itambe"
+  },
+  {
+    "id": 4111209,
+    "nome": "Itapejara d'Oeste",
+    "busca": "itapejara d'oeste"
+  },
+  {
+    "id": 4111258,
+    "nome": "Itaperuçu",
+    "busca": "itaperucu"
+  },
+  {
+    "id": 4111308,
+    "nome": "Itaúna do Sul",
+    "busca": "itauna do sul"
+  },
+  {
+    "id": 4111407,
+    "nome": "Ivaí",
+    "busca": "ivai"
+  },
+  {
+    "id": 4111506,
+    "nome": "Ivaiporã",
+    "busca": "ivaipora"
+  },
+  {
+    "id": 4111555,
+    "nome": "Ivaté",
+    "busca": "ivate"
+  },
+  {
+    "id": 4111605,
+    "nome": "Ivatuba",
+    "busca": "ivatuba"
+  },
+  {
+    "id": 4111704,
+    "nome": "Jaboti",
+    "busca": "jaboti"
+  },
+  {
+    "id": 4111803,
+    "nome": "Jacarezinho",
+    "busca": "jacarezinho"
+  },
+  {
+    "id": 4111902,
+    "nome": "Jaguapitã",
+    "busca": "jaguapita"
+  },
+  {
+    "id": 4112009,
+    "nome": "Jaguariaíva",
+    "busca": "jaguariaiva"
+  },
+  {
+    "id": 4112108,
+    "nome": "Jandaia do Sul",
+    "busca": "jandaia do sul"
+  },
+  {
+    "id": 4112207,
+    "nome": "Janiópolis",
+    "busca": "janiopolis"
+  },
+  {
+    "id": 4112306,
+    "nome": "Japira",
+    "busca": "japira"
+  },
+  {
+    "id": 4112405,
+    "nome": "Japurá",
+    "busca": "japura"
+  },
+  {
+    "id": 4112504,
+    "nome": "Jardim Alegre",
+    "busca": "jardim alegre"
+  },
+  {
+    "id": 4112603,
+    "nome": "Jardim Olinda",
+    "busca": "jardim olinda"
+  },
+  {
+    "id": 4112702,
+    "nome": "Jataizinho",
+    "busca": "jataizinho"
+  },
+  {
+    "id": 4112751,
+    "nome": "Jesuítas",
+    "busca": "jesuitas"
+  },
+  {
+    "id": 4112801,
+    "nome": "Joaquim Távora",
+    "busca": "joaquim tavora"
+  },
+  {
+    "id": 4112900,
+    "nome": "Jundiaí do Sul",
+    "busca": "jundiai do sul"
+  },
+  {
+    "id": 4112959,
+    "nome": "Juranda",
+    "busca": "juranda"
+  },
+  {
+    "id": 4113007,
+    "nome": "Jussara",
+    "busca": "jussara"
+  },
+  {
+    "id": 4113106,
+    "nome": "Kaloré",
+    "busca": "kalore"
+  },
+  {
+    "id": 4113205,
+    "nome": "Lapa",
+    "busca": "lapa"
+  },
+  {
+    "id": 4113254,
+    "nome": "Laranjal",
+    "busca": "laranjal"
+  },
+  {
+    "id": 4113304,
+    "nome": "Laranjeiras do Sul",
+    "busca": "laranjeiras do sul"
+  },
+  {
+    "id": 4113403,
+    "nome": "Leópolis",
+    "busca": "leopolis"
+  },
+  {
+    "id": 4113429,
+    "nome": "Lidianópolis",
+    "busca": "lidianopolis"
+  },
+  {
+    "id": 4113452,
+    "nome": "Lindoeste",
+    "busca": "lindoeste"
+  },
+  {
+    "id": 4113502,
+    "nome": "Loanda",
+    "busca": "loanda"
+  },
+  {
+    "id": 4113601,
+    "nome": "Lobato",
+    "busca": "lobato"
+  },
+  {
+    "id": 4113700,
+    "nome": "Londrina",
+    "busca": "londrina"
+  },
+  {
+    "id": 4113734,
+    "nome": "Luiziana",
+    "busca": "luiziana"
+  },
+  {
+    "id": 4113759,
+    "nome": "Lunardelli",
+    "busca": "lunardelli"
+  },
+  {
+    "id": 4113809,
+    "nome": "Lupionópolis",
+    "busca": "lupionopolis"
+  },
+  {
+    "id": 4113908,
+    "nome": "Mallet",
+    "busca": "mallet"
+  },
+  {
+    "id": 4114005,
+    "nome": "Mamborê",
+    "busca": "mambore"
+  },
+  {
+    "id": 4114104,
+    "nome": "Mandaguaçu",
+    "busca": "mandaguacu"
+  },
+  {
+    "id": 4114203,
+    "nome": "Mandaguari",
+    "busca": "mandaguari"
+  },
+  {
+    "id": 4114302,
+    "nome": "Mandirituba",
+    "busca": "mandirituba"
+  },
+  {
+    "id": 4114351,
+    "nome": "Manfrinópolis",
+    "busca": "manfrinopolis"
+  },
+  {
+    "id": 4114401,
+    "nome": "Mangueirinha",
+    "busca": "mangueirinha"
+  },
+  {
+    "id": 4114500,
+    "nome": "Manoel Ribas",
+    "busca": "manoel ribas"
+  },
+  {
+    "id": 4114609,
+    "nome": "Marechal Cândido Rondon",
+    "busca": "marechal candido rondon"
+  },
+  {
+    "id": 4114708,
+    "nome": "Maria Helena",
+    "busca": "maria helena"
+  },
+  {
+    "id": 4114807,
+    "nome": "Marialva",
+    "busca": "marialva"
+  },
+  {
+    "id": 4114906,
+    "nome": "Marilândia do Sul",
+    "busca": "marilandia do sul"
+  },
+  {
+    "id": 4115002,
+    "nome": "Marilena",
+    "busca": "marilena"
+  },
+  {
+    "id": 4115101,
+    "nome": "Mariluz",
+    "busca": "mariluz"
+  },
+  {
+    "id": 4115200,
+    "nome": "Maringá",
+    "busca": "maringa"
+  },
+  {
+    "id": 4115309,
+    "nome": "Mariópolis",
+    "busca": "mariopolis"
+  },
+  {
+    "id": 4115358,
+    "nome": "Maripá",
+    "busca": "maripa"
+  },
+  {
+    "id": 4115408,
+    "nome": "Marmeleiro",
+    "busca": "marmeleiro"
+  },
+  {
+    "id": 4115457,
+    "nome": "Marquinho",
+    "busca": "marquinho"
+  },
+  {
+    "id": 4115507,
+    "nome": "Marumbi",
+    "busca": "marumbi"
+  },
+  {
+    "id": 4115606,
+    "nome": "Matelândia",
+    "busca": "matelandia"
+  },
+  {
+    "id": 4115705,
+    "nome": "Matinhos",
+    "busca": "matinhos"
+  },
+  {
+    "id": 4115739,
+    "nome": "Mato Rico",
+    "busca": "mato rico"
+  },
+  {
+    "id": 4115754,
+    "nome": "Mauá da Serra",
+    "busca": "maua da serra"
+  },
+  {
+    "id": 4115804,
+    "nome": "Medianeira",
+    "busca": "medianeira"
+  },
+  {
+    "id": 4115853,
+    "nome": "Mercedes",
+    "busca": "mercedes"
+  },
+  {
+    "id": 4115903,
+    "nome": "Mirador",
+    "busca": "mirador"
+  },
+  {
+    "id": 4116000,
+    "nome": "Miraselva",
+    "busca": "miraselva"
+  },
+  {
+    "id": 4116059,
+    "nome": "Missal",
+    "busca": "missal"
+  },
+  {
+    "id": 4116109,
+    "nome": "Moreira Sales",
+    "busca": "moreira sales"
+  },
+  {
+    "id": 4116208,
+    "nome": "Morretes",
+    "busca": "morretes"
+  },
+  {
+    "id": 4116307,
+    "nome": "Munhoz de Melo",
+    "busca": "munhoz de melo"
+  },
+  {
+    "id": 4116406,
+    "nome": "Nossa Senhora das Graças",
+    "busca": "nossa senhora das gracas"
+  },
+  {
+    "id": 4116505,
+    "nome": "Nova Aliança do Ivaí",
+    "busca": "nova alianca do ivai"
+  },
+  {
+    "id": 4116604,
+    "nome": "Nova América da Colina",
+    "busca": "nova america da colina"
+  },
+  {
+    "id": 4116703,
+    "nome": "Nova Aurora",
+    "busca": "nova aurora"
+  },
+  {
+    "id": 4116802,
+    "nome": "Nova Cantu",
+    "busca": "nova cantu"
+  },
+  {
+    "id": 4116901,
+    "nome": "Nova Esperança",
+    "busca": "nova esperanca"
+  },
+  {
+    "id": 4116950,
+    "nome": "Nova Esperança do Sudoeste",
+    "busca": "nova esperanca do sudoeste"
+  },
+  {
+    "id": 4117008,
+    "nome": "Nova Fátima",
+    "busca": "nova fatima"
+  },
+  {
+    "id": 4117057,
+    "nome": "Nova Laranjeiras",
+    "busca": "nova laranjeiras"
+  },
+  {
+    "id": 4117107,
+    "nome": "Nova Londrina",
+    "busca": "nova londrina"
+  },
+  {
+    "id": 4117206,
+    "nome": "Nova Olímpia",
+    "busca": "nova olimpia"
+  },
+  {
+    "id": 4117214,
+    "nome": "Nova Santa Bárbara",
+    "busca": "nova santa barbara"
+  },
+  {
+    "id": 4117222,
+    "nome": "Nova Santa Rosa",
+    "busca": "nova santa rosa"
+  },
+  {
+    "id": 4117255,
+    "nome": "Nova Prata do Iguaçu",
+    "busca": "nova prata do iguacu"
+  },
+  {
+    "id": 4117271,
+    "nome": "Nova Tebas",
+    "busca": "nova tebas"
+  },
+  {
+    "id": 4117297,
+    "nome": "Novo Itacolomi",
+    "busca": "novo itacolomi"
+  },
+  {
+    "id": 4117305,
+    "nome": "Ortigueira",
+    "busca": "ortigueira"
+  },
+  {
+    "id": 4117404,
+    "nome": "Ourizona",
+    "busca": "ourizona"
+  },
+  {
+    "id": 4117453,
+    "nome": "Ouro Verde do Oeste",
+    "busca": "ouro verde do oeste"
+  },
+  {
+    "id": 4117503,
+    "nome": "Paiçandu",
+    "busca": "paicandu"
+  },
+  {
+    "id": 4117602,
+    "nome": "Palmas",
+    "busca": "palmas"
+  },
+  {
+    "id": 4117701,
+    "nome": "Palmeira",
+    "busca": "palmeira"
+  },
+  {
+    "id": 4117800,
+    "nome": "Palmital",
+    "busca": "palmital"
+  },
+  {
+    "id": 4117909,
+    "nome": "Palotina",
+    "busca": "palotina"
+  },
+  {
+    "id": 4118006,
+    "nome": "Paraíso do Norte",
+    "busca": "paraiso do norte"
+  },
+  {
+    "id": 4118105,
+    "nome": "Paranacity",
+    "busca": "paranacity"
+  },
+  {
+    "id": 4118204,
+    "nome": "Paranaguá",
+    "busca": "paranagua"
+  },
+  {
+    "id": 4118303,
+    "nome": "Paranapoema",
+    "busca": "paranapoema"
+  },
+  {
+    "id": 4118402,
+    "nome": "Paranavaí",
+    "busca": "paranavai"
+  },
+  {
+    "id": 4118451,
+    "nome": "Pato Bragado",
+    "busca": "pato bragado"
+  },
+  {
+    "id": 4118501,
+    "nome": "Pato Branco",
+    "busca": "pato branco"
+  },
+  {
+    "id": 4118600,
+    "nome": "Paula Freitas",
+    "busca": "paula freitas"
+  },
+  {
+    "id": 4118709,
+    "nome": "Paulo Frontin",
+    "busca": "paulo frontin"
+  },
+  {
+    "id": 4118808,
+    "nome": "Peabiru",
+    "busca": "peabiru"
+  },
+  {
+    "id": 4118857,
+    "nome": "Perobal",
+    "busca": "perobal"
+  },
+  {
+    "id": 4118907,
+    "nome": "Pérola",
+    "busca": "perola"
+  },
+  {
+    "id": 4119004,
+    "nome": "Pérola d'Oeste",
+    "busca": "perola d'oeste"
+  },
+  {
+    "id": 4119103,
+    "nome": "Piên",
+    "busca": "pien"
+  },
+  {
+    "id": 4119152,
+    "nome": "Pinhais",
+    "busca": "pinhais"
+  },
+  {
+    "id": 4119202,
+    "nome": "Pinhalão",
+    "busca": "pinhalao"
+  },
+  {
+    "id": 4119251,
+    "nome": "Pinhal de São Bento",
+    "busca": "pinhal de sao bento"
+  },
+  {
+    "id": 4119301,
+    "nome": "Pinhão",
+    "busca": "pinhao"
+  },
+  {
+    "id": 4119400,
+    "nome": "Piraí do Sul",
+    "busca": "pirai do sul"
+  },
+  {
+    "id": 4119509,
+    "nome": "Piraquara",
+    "busca": "piraquara"
+  },
+  {
+    "id": 4119608,
+    "nome": "Pitanga",
+    "busca": "pitanga"
+  },
+  {
+    "id": 4119657,
+    "nome": "Pitangueiras",
+    "busca": "pitangueiras"
+  },
+  {
+    "id": 4119707,
+    "nome": "Planaltina do Paraná",
+    "busca": "planaltina do parana"
+  },
+  {
+    "id": 4119806,
+    "nome": "Planalto",
+    "busca": "planalto"
+  },
+  {
+    "id": 4119905,
+    "nome": "Ponta Grossa",
+    "busca": "ponta grossa"
+  },
+  {
+    "id": 4119954,
+    "nome": "Pontal do Paraná",
+    "busca": "pontal do parana"
+  },
+  {
+    "id": 4120002,
+    "nome": "Porecatu",
+    "busca": "porecatu"
+  },
+  {
+    "id": 4120101,
+    "nome": "Porto Amazonas",
+    "busca": "porto amazonas"
+  },
+  {
+    "id": 4120150,
+    "nome": "Porto Barreiro",
+    "busca": "porto barreiro"
+  },
+  {
+    "id": 4120200,
+    "nome": "Porto Rico",
+    "busca": "porto rico"
+  },
+  {
+    "id": 4120309,
+    "nome": "Porto Vitória",
+    "busca": "porto vitoria"
+  },
+  {
+    "id": 4120333,
+    "nome": "Prado Ferreira",
+    "busca": "prado ferreira"
+  },
+  {
+    "id": 4120358,
+    "nome": "Pranchita",
+    "busca": "pranchita"
+  },
+  {
+    "id": 4120408,
+    "nome": "Presidente Castelo Branco",
+    "busca": "presidente castelo branco"
+  },
+  {
+    "id": 4120507,
+    "nome": "Primeiro de Maio",
+    "busca": "primeiro de maio"
+  },
+  {
+    "id": 4120606,
+    "nome": "Prudentópolis",
+    "busca": "prudentopolis"
+  },
+  {
+    "id": 4120655,
+    "nome": "Quarto Centenário",
+    "busca": "quarto centenario"
+  },
+  {
+    "id": 4120705,
+    "nome": "Quatiguá",
+    "busca": "quatigua"
+  },
+  {
+    "id": 4120804,
+    "nome": "Quatro Barras",
+    "busca": "quatro barras"
+  },
+  {
+    "id": 4120853,
+    "nome": "Quatro Pontes",
+    "busca": "quatro pontes"
+  },
+  {
+    "id": 4120903,
+    "nome": "Quedas do Iguaçu",
+    "busca": "quedas do iguacu"
+  },
+  {
+    "id": 4121000,
+    "nome": "Querência do Norte",
+    "busca": "querencia do norte"
+  },
+  {
+    "id": 4121109,
+    "nome": "Quinta do Sol",
+    "busca": "quinta do sol"
+  },
+  {
+    "id": 4121208,
+    "nome": "Quitandinha",
+    "busca": "quitandinha"
+  },
+  {
+    "id": 4121257,
+    "nome": "Ramilândia",
+    "busca": "ramilandia"
+  },
+  {
+    "id": 4121307,
+    "nome": "Rancho Alegre",
+    "busca": "rancho alegre"
+  },
+  {
+    "id": 4121356,
+    "nome": "Rancho Alegre D'Oeste",
+    "busca": "rancho alegre d'oeste"
+  },
+  {
+    "id": 4121406,
+    "nome": "Realeza",
+    "busca": "realeza"
+  },
+  {
+    "id": 4121505,
+    "nome": "Rebouças",
+    "busca": "reboucas"
+  },
+  {
+    "id": 4121604,
+    "nome": "Renascença",
+    "busca": "renascenca"
+  },
+  {
+    "id": 4121703,
+    "nome": "Reserva",
+    "busca": "reserva"
+  },
+  {
+    "id": 4121752,
+    "nome": "Reserva do Iguaçu",
+    "busca": "reserva do iguacu"
+  },
+  {
+    "id": 4121802,
+    "nome": "Ribeirão Claro",
+    "busca": "ribeirao claro"
+  },
+  {
+    "id": 4121901,
+    "nome": "Ribeirão do Pinhal",
+    "busca": "ribeirao do pinhal"
+  },
+  {
+    "id": 4122008,
+    "nome": "Rio Azul",
+    "busca": "rio azul"
+  },
+  {
+    "id": 4122107,
+    "nome": "Rio Bom",
+    "busca": "rio bom"
+  },
+  {
+    "id": 4122156,
+    "nome": "Rio Bonito do Iguaçu",
+    "busca": "rio bonito do iguacu"
+  },
+  {
+    "id": 4122172,
+    "nome": "Rio Branco do Ivaí",
+    "busca": "rio branco do ivai"
+  },
+  {
+    "id": 4122206,
+    "nome": "Rio Branco do Sul",
+    "busca": "rio branco do sul"
+  },
+  {
+    "id": 4122305,
+    "nome": "Rio Negro",
+    "busca": "rio negro"
+  },
+  {
+    "id": 4122404,
+    "nome": "Rolândia",
+    "busca": "rolandia"
+  },
+  {
+    "id": 4122503,
+    "nome": "Roncador",
+    "busca": "roncador"
+  },
+  {
+    "id": 4122602,
+    "nome": "Rondon",
+    "busca": "rondon"
+  },
+  {
+    "id": 4122651,
+    "nome": "Rosário do Ivaí",
+    "busca": "rosario do ivai"
+  },
+  {
+    "id": 4122701,
+    "nome": "Sabáudia",
+    "busca": "sabaudia"
+  },
+  {
+    "id": 4122800,
+    "nome": "Salgado Filho",
+    "busca": "salgado filho"
+  },
+  {
+    "id": 4122909,
+    "nome": "Salto do Itararé",
+    "busca": "salto do itarare"
+  },
+  {
+    "id": 4123006,
+    "nome": "Salto do Lontra",
+    "busca": "salto do lontra"
+  },
+  {
+    "id": 4123105,
+    "nome": "Santa Amélia",
+    "busca": "santa amelia"
+  },
+  {
+    "id": 4123204,
+    "nome": "Santa Cecília do Pavão",
+    "busca": "santa cecilia do pavao"
+  },
+  {
+    "id": 4123303,
+    "nome": "Santa Cruz de Monte Castelo",
+    "busca": "santa cruz de monte castelo"
+  },
+  {
+    "id": 4123402,
+    "nome": "Santa Fé",
+    "busca": "santa fe"
+  },
+  {
+    "id": 4123501,
+    "nome": "Santa Helena",
+    "busca": "santa helena"
+  },
+  {
+    "id": 4123600,
+    "nome": "Santa Inês",
+    "busca": "santa ines"
+  },
+  {
+    "id": 4123709,
+    "nome": "Santa Isabel do Ivaí",
+    "busca": "santa isabel do ivai"
+  },
+  {
+    "id": 4123808,
+    "nome": "Santa Izabel do Oeste",
+    "busca": "santa izabel do oeste"
+  },
+  {
+    "id": 4123824,
+    "nome": "Santa Lúcia",
+    "busca": "santa lucia"
+  },
+  {
+    "id": 4123857,
+    "nome": "Santa Maria do Oeste",
+    "busca": "santa maria do oeste"
+  },
+  {
+    "id": 4123907,
+    "nome": "Santa Mariana",
+    "busca": "santa mariana"
+  },
+  {
+    "id": 4123956,
+    "nome": "Santa Mônica",
+    "busca": "santa monica"
+  },
+  {
+    "id": 4124004,
+    "nome": "Santana do Itararé",
+    "busca": "santana do itarare"
+  },
+  {
+    "id": 4124020,
+    "nome": "Santa Tereza do Oeste",
+    "busca": "santa tereza do oeste"
+  },
+  {
+    "id": 4124053,
+    "nome": "Santa Terezinha de Itaipu",
+    "busca": "santa terezinha de itaipu"
+  },
+  {
+    "id": 4124103,
+    "nome": "Santo Antônio da Platina",
+    "busca": "santo antonio da platina"
+  },
+  {
+    "id": 4124202,
+    "nome": "Santo Antônio do Caiuá",
+    "busca": "santo antonio do caiua"
+  },
+  {
+    "id": 4124301,
+    "nome": "Santo Antônio do Paraíso",
+    "busca": "santo antonio do paraiso"
+  },
+  {
+    "id": 4124400,
+    "nome": "Santo Antônio do Sudoeste",
+    "busca": "santo antonio do sudoeste"
+  },
+  {
+    "id": 4124509,
+    "nome": "Santo Inácio",
+    "busca": "santo inacio"
+  },
+  {
+    "id": 4124608,
+    "nome": "São Carlos do Ivaí",
+    "busca": "sao carlos do ivai"
+  },
+  {
+    "id": 4124707,
+    "nome": "São Jerônimo da Serra",
+    "busca": "sao jeronimo da serra"
+  },
+  {
+    "id": 4124806,
+    "nome": "São João",
+    "busca": "sao joao"
+  },
+  {
+    "id": 4124905,
+    "nome": "São João do Caiuá",
+    "busca": "sao joao do caiua"
+  },
+  {
+    "id": 4125001,
+    "nome": "São João do Ivaí",
+    "busca": "sao joao do ivai"
+  },
+  {
+    "id": 4125100,
+    "nome": "São João do Triunfo",
+    "busca": "sao joao do triunfo"
+  },
+  {
+    "id": 4125209,
+    "nome": "São Jorge d'Oeste",
+    "busca": "sao jorge d'oeste"
+  },
+  {
+    "id": 4125308,
+    "nome": "São Jorge do Ivaí",
+    "busca": "sao jorge do ivai"
+  },
+  {
+    "id": 4125357,
+    "nome": "São Jorge do Patrocínio",
+    "busca": "sao jorge do patrocinio"
+  },
+  {
+    "id": 4125407,
+    "nome": "São José da Boa Vista",
+    "busca": "sao jose da boa vista"
+  },
+  {
+    "id": 4125456,
+    "nome": "São José das Palmeiras",
+    "busca": "sao jose das palmeiras"
+  },
+  {
+    "id": 4125506,
+    "nome": "São José dos Pinhais",
+    "busca": "sao jose dos pinhais"
+  },
+  {
+    "id": 4125555,
+    "nome": "São Manoel do Paraná",
+    "busca": "sao manoel do parana"
+  },
+  {
+    "id": 4125605,
+    "nome": "São Mateus do Sul",
+    "busca": "sao mateus do sul"
+  },
+  {
+    "id": 4125704,
+    "nome": "São Miguel do Iguaçu",
+    "busca": "sao miguel do iguacu"
+  },
+  {
+    "id": 4125753,
+    "nome": "São Pedro do Iguaçu",
+    "busca": "sao pedro do iguacu"
+  },
+  {
+    "id": 4125803,
+    "nome": "São Pedro do Ivaí",
+    "busca": "sao pedro do ivai"
+  },
+  {
+    "id": 4125902,
+    "nome": "São Pedro do Paraná",
+    "busca": "sao pedro do parana"
+  },
+  {
+    "id": 4126009,
+    "nome": "São Sebastião da Amoreira",
+    "busca": "sao sebastiao da amoreira"
+  },
+  {
+    "id": 4126108,
+    "nome": "São Tomé",
+    "busca": "sao tome"
+  },
+  {
+    "id": 4126207,
+    "nome": "Sapopema",
+    "busca": "sapopema"
+  },
+  {
+    "id": 4126256,
+    "nome": "Sarandi",
+    "busca": "sarandi"
+  },
+  {
+    "id": 4126272,
+    "nome": "Saudade do Iguaçu",
+    "busca": "saudade do iguacu"
+  },
+  {
+    "id": 4126306,
+    "nome": "Sengés",
+    "busca": "senges"
+  },
+  {
+    "id": 4126355,
+    "nome": "Serranópolis do Iguaçu",
+    "busca": "serranopolis do iguacu"
+  },
+  {
+    "id": 4126405,
+    "nome": "Sertaneja",
+    "busca": "sertaneja"
+  },
+  {
+    "id": 4126504,
+    "nome": "Sertanópolis",
+    "busca": "sertanopolis"
+  },
+  {
+    "id": 4126603,
+    "nome": "Siqueira Campos",
+    "busca": "siqueira campos"
+  },
+  {
+    "id": 4126652,
+    "nome": "Sulina",
+    "busca": "sulina"
+  },
+  {
+    "id": 4126678,
+    "nome": "Tamarana",
+    "busca": "tamarana"
+  },
+  {
+    "id": 4126702,
+    "nome": "Tamboara",
+    "busca": "tamboara"
+  },
+  {
+    "id": 4126801,
+    "nome": "Tapejara",
+    "busca": "tapejara"
+  },
+  {
+    "id": 4126900,
+    "nome": "Tapira",
+    "busca": "tapira"
+  },
+  {
+    "id": 4127007,
+    "nome": "Teixeira Soares",
+    "busca": "teixeira soares"
+  },
+  {
+    "id": 4127106,
+    "nome": "Telêmaco Borba",
+    "busca": "telemaco borba"
+  },
+  {
+    "id": 4127205,
+    "nome": "Terra Boa",
+    "busca": "terra boa"
+  },
+  {
+    "id": 4127304,
+    "nome": "Terra Rica",
+    "busca": "terra rica"
+  },
+  {
+    "id": 4127403,
+    "nome": "Terra Roxa",
+    "busca": "terra roxa"
+  },
+  {
+    "id": 4127502,
+    "nome": "Tibagi",
+    "busca": "tibagi"
+  },
+  {
+    "id": 4127601,
+    "nome": "Tijucas do Sul",
+    "busca": "tijucas do sul"
+  },
+  {
+    "id": 4127700,
+    "nome": "Toledo",
+    "busca": "toledo"
+  },
+  {
+    "id": 4127809,
+    "nome": "Tomazina",
+    "busca": "tomazina"
+  },
+  {
+    "id": 4127858,
+    "nome": "Três Barras do Paraná",
+    "busca": "tres barras do parana"
+  },
+  {
+    "id": 4127882,
+    "nome": "Tunas do Paraná",
+    "busca": "tunas do parana"
+  },
+  {
+    "id": 4127908,
+    "nome": "Tuneiras do Oeste",
+    "busca": "tuneiras do oeste"
+  },
+  {
+    "id": 4127957,
+    "nome": "Tupãssi",
+    "busca": "tupassi"
+  },
+  {
+    "id": 4127965,
+    "nome": "Turvo",
+    "busca": "turvo"
+  },
+  {
+    "id": 4128005,
+    "nome": "Ubiratã",
+    "busca": "ubirata"
+  },
+  {
+    "id": 4128104,
+    "nome": "Umuarama",
+    "busca": "umuarama"
+  },
+  {
+    "id": 4128203,
+    "nome": "União da Vitória",
+    "busca": "uniao da vitoria"
+  },
+  {
+    "id": 4128302,
+    "nome": "Uniflor",
+    "busca": "uniflor"
+  },
+  {
+    "id": 4128401,
+    "nome": "Uraí",
+    "busca": "urai"
+  },
+  {
+    "id": 4128500,
+    "nome": "Wenceslau Braz",
+    "busca": "wenceslau braz"
+  },
+  {
+    "id": 4128534,
+    "nome": "Ventania",
+    "busca": "ventania"
+  },
+  {
+    "id": 4128559,
+    "nome": "Vera Cruz do Oeste",
+    "busca": "vera cruz do oeste"
+  },
+  {
+    "id": 4128609,
+    "nome": "Verê",
+    "busca": "vere"
+  },
+  {
+    "id": 4128625,
+    "nome": "Alto Paraíso",
+    "busca": "alto paraiso"
+  },
+  {
+    "id": 4128633,
+    "nome": "Doutor Ulysses",
+    "busca": "doutor ulysses"
+  },
+  {
+    "id": 4128658,
+    "nome": "Virmond",
+    "busca": "virmond"
+  },
+  {
+    "id": 4128708,
+    "nome": "Vitorino",
+    "busca": "vitorino"
+  },
+  {
+    "id": 4128807,
+    "nome": "Xambrê",
+    "busca": "xambre"
+  }
+]
