@@ -1,7 +1,6 @@
 package com.pz.api_previsao.scraper.simepar;
 
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

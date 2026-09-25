@@ -1,12 +1,11 @@
 package com.pz.api_previsao.util;
 
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class Normalizacao {
 
     String condicao;
-    long iconeIndex;
+    int iconeIndex;
 
     public void setIconeIndex(String condicao) {
         switch (condicao) {
@@ -27,7 +26,7 @@ public class Normalizacao {
         }
     }
 
-    public long getIconeIndex() {
+    public int getIconeIndex() {
         return iconeIndex;
     }
     
