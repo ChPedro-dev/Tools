@@ -1,7 +1,5 @@
 package com.pz.api_previsao.model;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

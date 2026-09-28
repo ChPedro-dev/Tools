@@ -50,9 +50,9 @@ public class PrevisaoController {
     }
 
     @GetMapping("/cache")
-    public List<Map<String, Object>> CacheDados() 
+    public List<Cidade> CacheDados() 
     {
-        return dadosCache;
+        return dadosCache2;
     }
 
     @PostMapping("/scrap/pgua")

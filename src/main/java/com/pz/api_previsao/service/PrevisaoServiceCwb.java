@@ -50,9 +50,10 @@ public class PrevisaoServiceCwb {
             String[] dia = dados.dia(driver);
 
             String[] infos1 = new String[5] ;
-            String[] infos2;
+            String[] infos2 = new String[5] ;
 
-            switch(acao){
+            switch(acao)
+            {
                 case "BDL" ->{
                     infos1 = dados.infos(driver);
                 } 
@@ -69,17 +70,10 @@ public class PrevisaoServiceCwb {
                 }
             }
 
-
-            if (acao.equals("LU")) {
-                infos2 = dados.infos2(driver);
-            } else {
-                infos2 = new String[] { "", "", "" };
-            }
-
             for (int i = 0; i < cidades.size(); i++) {
 
                 // Puxa a lista de dias apenas uma vez por cidade
-               // List<Dia> dias = cidades.get(i).getDias();
+                // List<Dia> dias = cidades.get(i).getDias();
                 Dia[] dias = cidades.get(i).getDias(); 
 
                 for (int j = 0; j < 5; j++) {
@@ -95,8 +89,7 @@ public class PrevisaoServiceCwb {
 
                     normalizacao.setCondicao(icones[j]);
                     diaAtual.setCondicao(normalizacao.getCondicao());
-
-
+                
                     switch (i) {
                         case 0 -> {
                             // ATENÇÃO: infos[0] vai se repetir para todos os 'j' desta cidade

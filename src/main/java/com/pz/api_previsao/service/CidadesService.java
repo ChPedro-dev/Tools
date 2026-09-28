@@ -11,11 +11,22 @@ import com.pz.dto.CidadeDto;
 @Service 
 public class CidadesService {
 
+    List<CidadeDto> cidades;
+
     public List<CidadeDto> cidades() throws IOException{
 
         return LerJson.ler();
-        
     } 
+
+    public void SalvarLista(List<CidadeDto> cidades){
+        
+        this.cidades = cidades;
+    }
+
+    public List<CidadeDto> ListaCidades(){
+
+        return cidades;
+    }
 
 
 
