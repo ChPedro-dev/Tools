@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class Controller {
+public class PageController {
 
     @GetMapping("/")
     public Object getMethodName() {

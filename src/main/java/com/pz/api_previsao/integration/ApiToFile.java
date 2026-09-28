@@ -12,7 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class ApiToFile {
     
-    public void convert(String caminho, List<Map<String, Object>> dados) {
+    public void convert(String caminho, List<Map<String, Object>> dados) 
+    {
         try {
             // Instancia o ObjectMapper
             ObjectMapper mapper = new ObjectMapper();

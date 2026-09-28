@@ -1,17 +1,337 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 
 <head>
 	<meta charset="UTF-8">
-	<title>Previsão - Tools </title>
+	<title>Previsão - Tools</title>
 	<link rel="icon" href="IMGS/toolbox-solid-full.svg">
-	<!-- Importa o CSS principal -->
 	<link rel="stylesheet" href="css/style.css" type="text/css">
 	<link rel="stylesheet" href="css/stylePrevCards.css" type="text/css">
-
-	<!-- Importa os ícones do Font Awesome -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
+	<style>
+		/* ─── Painel de busca ─── */
+		.query-panel {
+			background: #D6E0F8;
+			background: linear-gradient(180deg, rgba(214,224,248,1) 0%, rgba(234,241,255,1) 100%);
+			border-radius: 10px;
+			padding: 1.5rem 2rem;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+			border: 0.5px solid #0000002a;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+		.query-panel h2 {
+			font-size: .85rem;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: .07em;
+			color: #555;
+			margin-bottom: 4px;
+		}
+
+		/* ─── Busca autocomplete ─── */
+		.search-wrap { position: relative; }
+		.search-wrap i {
+			position: absolute; left: 12px; top: 50%;
+			transform: translateY(-50%); color: #6c757d;
+			pointer-events: none; font-size: .85rem;
+		}
+		#cidade-search {
+			width: 100%;
+			padding: 0.55rem 0.8rem 0.55rem 34px;
+			border: 2px solid #b0b0b0;
+			border-radius: 8px;
+			background: #fff;
+			color: #2c2c2c;
+			font-family: inherit;
+			font-size: .9rem;
+			transition: border-color .2s;
+			outline: none;
+		}
+		#cidade-search:focus { border-color: #152E7E; box-shadow: 0 0 6px rgba(21,46,126,.25); }
+		#cidade-search::placeholder { color: #6c757d; }
+
+		#dropdown {
+			position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+			background: #fff;
+			border: 1.5px solid #b0b0b0;
+			border-radius: 8px;
+			max-height: 210px;
+			overflow-y: auto;
+			z-index: 200;
+			box-shadow: 0 6px 20px rgba(0,0,0,.15);
+			display: none;
+		}
+		#dropdown.open { display: block; }
+		.dd-item {
+			padding: 9px 14px;
+			cursor: pointer;
+			font-size: .875rem;
+			transition: background .12s;
+			color: #2c2c2c;
+		}
+		.dd-item:hover { background: #e8f0fe; }
+		.dd-empty { padding: 10px 14px; color: #6c757d; font-size: .85rem; }
+
+		/* ─── Tags de cidades selecionadas ─── */
+		#tags-wrap {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			min-height: 8px;
+		}
+		.tag {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			background: #152E7E;
+			background: linear-gradient(135deg, rgba(32,68,183,1), rgba(30,74,218,1));
+			color: #fff;
+			border-radius: 20px;
+			padding: 4px 10px 4px 13px;
+			font-size: .78rem;
+			font-weight: 600;
+			animation: tagpop .18s ease;
+		}
+		.tag button {
+			background: none; border: none; color: rgba(255,255,255,.8);
+			cursor: pointer; font-size: 1rem; line-height: 1;
+			padding: 0; transition: color .15s;
+		}
+		.tag button:hover { color: #fff; }
+		@keyframes tagpop { from { transform: scale(.75); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+		/* ─── Linha de ação ─── */
+		.acao-row {
+			display: flex;
+			gap: 12px;
+			align-items: flex-end;
+			flex-wrap: wrap;
+		}
+		.field-group { display: flex; flex-direction: column; gap: 5px; flex: 1 1 180px; }
+		.field-group label {
+			font-size: .75rem; color: #555; font-weight: 600;
+			text-transform: uppercase; letter-spacing: .06em;
+		}
+		.field-group select,
+		.field-group input[type="text"] {
+			padding: 0.55rem 0.8rem;
+			border: 2px solid #b0b0b0;
+			border-radius: 8px;
+			background: #fff;
+			color: #2c2c2c;
+			font-size: .9rem;
+			font-family: inherit;
+			outline: none;
+			transition: border-color .2s;
+		}
+		.field-group select:focus,
+		.field-group input[type="text"]:focus {
+			border-color: #152E7E;
+			box-shadow: 0 0 6px rgba(21,46,126,.25);
+		}
+
+		#btn-buscar {
+			display: flex; align-items: center; gap: 8px;
+			padding: 0.6rem 1.5rem;
+			background: #152E7E;
+			background: linear-gradient(360deg, rgba(21,46,126,1) 17%, rgba(32,68,183,1) 62%, rgba(30,74,218,1) 100%);
+			color: #fff;
+			border: none;
+			border-radius: 8px;
+			font-size: .9rem;
+			font-weight: 600;
+			font-family: inherit;
+			cursor: pointer;
+			transition: all .2s;
+			white-space: nowrap;
+			align-self: flex-end;
+			box-shadow: 0 0 10px rgba(108,117,125,.4);
+		}
+		#btn-buscar:hover:not(:disabled) { transform: translateY(-2px); }
+		#btn-buscar:active:not(:disabled) { transform: scale(.97); }
+		#btn-buscar:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+		/* ─── Header de resultados ─── */
+		.results-header {
+			display: none;
+			align-items: center;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 6px;
+			padding: 0 4px;
+		}
+		.results-header h2 { font-size: .95rem; font-weight: 600; color: #2c2c2c; }
+		.results-header .meta { font-size: .78rem; color: #6c757d; }
+		.badge {
+			display: inline-block;
+			background: #152E7E;
+			color: #fff;
+			border-radius: 20px;
+			padding: 2px 10px;
+			font-size: .72rem;
+			font-weight: 700;
+			margin-left: 6px;
+		}
+
+		/* ─── Cards ─── */
+		.prev-panel {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 20px;
+			padding: 0;
+			justify-content: flex-start;
+		}
+		.prev-card {
+			width: 300px;
+			border-radius: 16px;
+			overflow: hidden;
+			box-shadow: 0 8px 24px rgba(0,0,0,.12);
+			background: #fff;
+			border: 0.5px solid #0000001a;
+			transition: transform .2s, box-shadow .2s;
+		}
+		.prev-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(21,46,126,.2); }
+
+		.prev-card-header {
+			background: #152E7E;
+			background: linear-gradient(135deg, rgba(21,46,126,1), rgba(30,74,218,1));
+			color: #fff;
+			padding: 16px 20px 12px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.prev-card-header h3 { font-size: .95rem; font-weight: 700; margin: 0; text-transform: capitalize; }
+		.city-id-badge {
+			font-size: .7rem;
+			background: rgba(255,255,255,.2);
+			padding: 2px 8px;
+			border-radius: 12px;
+			font-weight: 600;
+		}
+
+		/* Abas dos dias */
+		.day-tabs {
+			display: flex;
+			overflow-x: auto;
+			scrollbar-width: none;
+			border-bottom: 2px solid #e8f0fe;
+		}
+		.day-tabs::-webkit-scrollbar { display: none; }
+		.day-tab {
+			flex-shrink: 0;
+			padding: 9px 13px;
+			font-size: .75rem;
+			font-weight: 600;
+			background: none;
+			border: none;
+			border-bottom: 2px solid transparent;
+			cursor: pointer;
+			color: #6c757d;
+			font-family: inherit;
+			transition: color .15s, border-color .15s;
+			white-space: nowrap;
+			margin-bottom: -2px;
+		}
+		.day-tab.active { color: #152E7E; border-bottom-color: #152E7E; }
+		.day-tab:hover:not(.active) { color: #2c2c2c; }
+
+		.day-panels { padding: 16px 18px 18px; }
+		.day-panel { display: none; animation: fadein .2s ease; }
+		.day-panel.active { display: block; }
+		@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+		.weather-main {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 14px;
+		}
+		.weather-icon { font-size: 2.4rem; line-height: 1; }
+		.temp-block { display: flex; flex-direction: column; }
+		.temp-max { font-size: 1.4rem; font-weight: 700; color: #e88a1e; }
+		.temp-min { font-size: .9rem; font-weight: 600; color: #152E7E; }
+		.condicao-txt { font-size: .8rem; color: #6c757d; margin-top: 2px; }
+
+		.day-details {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 8px;
+		}
+		.detail-box {
+			background: #f0f4ff;
+			border-radius: 8px;
+			padding: 9px 11px;
+		}
+		.detail-box .lbl { font-size: .67rem; color: #6c757d; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 3px; }
+		.detail-box .val { font-size: .88rem; font-weight: 700; color: #2c2c2c; }
+
+		.prob-bar-wrap { margin-top: 12px; }
+		.prob-bar-lbl { font-size: .7rem; color: #6c757d; display: flex; justify-content: space-between; margin-bottom: 5px; }
+		.prob-bar-bg { height: 6px; background: #e0e0e0; border-radius: 3px; overflow: hidden; }
+		.prob-bar-fill {
+			height: 100%;
+			background: linear-gradient(90deg, #152E7E, #1e4ada);
+			border-radius: 3px;
+			transition: width .5s ease;
+		}
+
+		/* ─── Skeleton ─── */
+		.skeleton-grid {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+		.skeleton-card {
+			width: 300px;
+			background: #e8f0fe;
+			border-radius: 16px;
+			padding: 20px;
+			animation: pulse 1.3s ease-in-out infinite;
+		}
+		.skel { background: #c8d8f8; border-radius: 6px; margin-bottom: 10px; }
+		.skel-h  { height: 18px; width: 55%; }
+		.skel-r  { height: 12px; }
+		.skel-r.w80 { width: 80%; }
+		.skel-r.w60 { width: 60%; }
+		.skel-r.w70 { width: 70%; }
+		@keyframes pulse { 0%,100%{ opacity:1; } 50%{ opacity:.45; } }
+
+		/* ─── Estado vazio / erro ─── */
+		.state-box {
+			text-align: center;
+			padding: 50px 20px;
+			color: #6c757d;
+		}
+		.state-box .icon { font-size: 2.5rem; margin-bottom: 14px; }
+		.state-box p { font-size: .9rem; }
+
+		/* ─── Toast ─── */
+		#toast {
+			position: fixed;
+			bottom: 24px; right: 24px;
+			background: #c0392b;
+			color: #fff;
+			padding: 12px 18px;
+			border-radius: 10px;
+			font-size: .86rem;
+			font-weight: 500;
+			box-shadow: 0 4px 16px rgba(0,0,0,.3);
+			display: none;
+			z-index: 999;
+			max-width: 330px;
+			font-family: inherit;
+			animation: slideup .3s ease;
+		}
+		@keyframes slideup { from { transform: translateY(16px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+
+		/* ─── Spinner ─── */
+		.spin { animation: rot .7s linear infinite; }
+		@keyframes rot { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+	</style>
 </head>
 
 <body>
@@ -21,56 +341,80 @@
 		<aside class="sidebar">
 			<h2><i class="fa-solid fa-chart-line"></i> Tools</h2>
 			<nav>
-				<a href="index.html"><i class="fa-solid fa-house"></i> Home </a>
-				<a href="previsao.html"><i class="fa-solid fa-cloud-sun"></i> Previsao do Tempo </a>
-				<a href="sorteio.html"><i class="fa-solid fa-trophy"></i> Sorteador </a>
-
+				<a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+				<a href="previsao.html"><i class="fa-solid fa-cloud-sun"></i> Previsão do Tempo</a>
+				<a href="sorteio.html"><i class="fa-solid fa-trophy"></i> Sorteador</a>
 			</nav>
 		</aside>
 
-		<!-- ===== CONTEÚDO PRINCIPAL ===== -->
+		<!-- ===== CONTEÚDO ===== -->
 		<main class="content">
+
+			<!-- Cabeçalho -->
 			<header>
 				<h1>Previsão do Tempo</h1>
-				<p>Ultima Atualização: </p>
-				<p id="horario" onload="RequestTime(event)"></p>
-				<div class="button-panel">
-					<div class="form">
-						<button
-							style="background: #152E7E; background: linear-gradient(360deg, rgba(21, 46, 126, 1) 17%, rgba(32, 68, 183, 1) 62%, rgba(30, 74, 218, 1) 100%);"
-							class="botoes-previsao" type="submit" name="acao" value="LU" onclick="RequestPrev(event)"
-							class="button">
-							LU
-						</button>
-						<button
-							style="background: #e88a1e; background: linear-gradient(360deg, rgba(232, 138, 30, 1) 23%, rgba(232, 171, 30, 1) 66%, rgba(235, 214, 28, 1) 100%);"
-							class="botoes-previsao" type="submit" name="acao" value="BDL" onclick="RequestPrev(event)"
-							class="button">
-							BDL/VOZ
-						</button>
-					</div>
-				</div>
-
+				<p>Última atualização: <span id="horario">—</span></p>
 			</header>
 
-			<section class="prev-panel">
-				<button onclick="LoadCards()"> caregar</button>
-				
-			</section>
+			<!-- Painel de busca -->
+			<div class="query-panel">
+				<h2><i class="fa-solid fa-magnifying-glass" style="margin-right:6px;"></i>Consulta</h2>
 
-			<dialog id="loadingPopup">
-				<div class="container-loading">
-					<div class="loading"></div>
-					<p>Carregando dados...</p>
+				<!-- Busca de cidade -->
+				<div class="search-wrap" id="search-container">
+					<i class="fa-solid fa-city"></i>
+					<input id="cidade-search" type="text" placeholder="Pesquisar cidade…" autocomplete="off" />
+					<div id="dropdown" role="listbox"></div>
 				</div>
-			</dialog>
 
+				<!-- Tags das cidades selecionadas -->
+				<div id="tags-wrap"></div>
+
+				<!-- Acao + botão -->
+				<div class="acao-row">
+					<div class="field-group">
+						<label for="acao-select"><i class="fa-solid fa-bolt"></i> Ação</label>
+						<select id="acao-select">
+							<option value="buscar_previsao">buscar_previsao</option>
+							<option value="custom">Personalizada…</option>
+						</select>
+					</div>
+					<div class="field-group" id="custom-acao-wrap" style="display:none;">
+						<label for="acao-custom">Ação personalizada</label>
+						<input type="text" id="acao-custom" placeholder="ex: outra_acao" />
+					</div>
+					<button id="btn-buscar" disabled>
+						<i class="fa-solid fa-cloud-arrow-down"></i>
+						Buscar previsão
+					</button>
+				</div>
+			</div>
+
+			<!-- Header dos resultados -->
+			<div class="results-header" id="results-header">
+				<div>
+					<h2>Resultados <span class="badge" id="result-count"></span></h2>
+				</div>
+				<span class="meta" id="result-meta"></span>
+			</div>
+
+			<!-- Área de output -->
+			<section class="prev-panel" id="prev-panel"></section>
 
 		</main>
-
-
-
 	</div>
+
+	<!-- Toast de erro -->
+	<div id="toast"></div>
+
+	<!-- Loading modal -->
+	<dialog id="loadingPopup">
+		<div class="container-loading">
+			<div class="loading"></div>
+			<p>Carregando dados...</p>
+		</div>
+	</dialog>
+
+	<script src="Scripts/scriptPrev.js"></script>
 </body>
-<script src="Scripts/scriptPrev.js"></script>
 </html>

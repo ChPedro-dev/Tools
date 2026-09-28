@@ -1,16 +1,12 @@
 package com.pz.api_previsao.util;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service 
 public class Normalizacao {
 
     String condicao;
-    long iconeIndex;
-
-    public long getIconeIndex() {
-        return iconeIndex;
-    }
+    int iconeIndex;
 
     public void setIconeIndex(String condicao) {
         switch (condicao) {
@@ -31,10 +27,14 @@ public class Normalizacao {
         }
     }
 
+    public int getIconeIndex() {
+        return iconeIndex;
+    }
+    
     public String getCondicao() {
         return condicao;
     }
-
+    
     public void setCondicao(String condicao) {
 
         switch (condicao) {
@@ -44,7 +44,7 @@ public class Normalizacao {
             default:
                 this.condicao = condicao;
         }
-    }
+    }   
 
     public static String temp(String temp) {
 
