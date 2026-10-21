@@ -1,22 +1,18 @@
 package com.pz.api_previsao.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import org.springframework.core.io.ClassPathResource;
 
 public abstract class LeitorJson {
 
-     public static String Ler(String path) throws IOException {
-            String json = String.join(" ",
-                    Files.readAllLines(
-                            Paths.get(path),
-                            StandardCharsets.UTF_8)
-            );
-            return json;
+    public static String Ler(String classpathLocation) throws IOException {
+        ClassPathResource resource = new ClassPathResource(classpathLocation);
+        try (InputStream is = resource.getInputStream()) {
+            return new String(is.readAllBytes(), StandardCharsets.UTF_8);
+        }
     }
-
-
-
 
 }

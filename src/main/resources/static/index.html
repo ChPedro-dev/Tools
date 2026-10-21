@@ -135,6 +135,9 @@
         <label for="acao-select">Ação</label>
         <select id="acao-select">
           <option value="buscar_previsao">buscar_previsao</option>
+          <option value="BDL">BDL</option>
+          <option value="LU">LU</option>
+          <option value="18h">18h</option>
           <option value="custom">Personalizada…</option>
         </select>
       </div>
@@ -275,13 +278,27 @@
       updateBtn();
     }
 
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function renderTags() {
       tagsWrap.innerHTML = '';
       state.selected.forEach(city => {
         const tag = document.createElement('span');
         tag.className = 'tag';
-        tag.innerHTML = city.nome + ' <button aria-label="Remover ' + city.nome + '" data-id="' + city.id + '">&times;</button>';
-        tag.querySelector('button').addEventListener('click', () => removeCity(city.id));
+        tag.appendChild(document.createTextNode(city.nome + ' '));
+        const btn = document.createElement('button');
+        btn.setAttribute('aria-label', 'Remover ' + city.nome);
+        btn.dataset.id = city.id;
+        btn.textContent = '×';
+        btn.addEventListener('click', () => removeCity(city.id));
+        tag.appendChild(btn);
         tagsWrap.appendChild(tag);
       });
     }
@@ -312,7 +329,7 @@
         renderResults(data, acao);
       } catch(e) {
         showToast('Erro: ' + e.message, 7000);
-        output.innerHTML = '<div class="state-box error"><div class="icon">⚠️</div><p>' + e.message + '</p></div>';
+        output.innerHTML = '<div class="state-box error"><div class="icon">⚠️</div><p>' + escapeHtml(e.message) + '</p></div>';
         resHeader.style.display = 'none';
       } finally {
         state.loading = false;
@@ -430,25 +447,26 @@
 
     function renderCard(city) {
       const dias = city.dias || [];
+      const safeCityId = escapeHtml(city.id);
       const tabs = dias.map((d,i) =>
-        '<button class="tab-btn' + (i===0?' active':'') + '" data-panel="' + city.id + '-' + i + '">' + (d.dia||'Dia '+(i+1)) + '</button>'
+        '<button class="tab-btn' + (i===0?' active':'') + '" data-panel="' + safeCityId + '-' + i + '">' + escapeHtml(d.dia||'Dia '+(i+1)) + '</button>'
       ).join('');
       const panels = dias.map((d,i) => {
         const icon = getWeatherIcon(d.condicao, d.iconeIndex);
         const pn = parseProbNum(d.prob);
-        return '<div class="tab-panel' + (i===0?' active':'') + '" data-id="' + city.id + '-' + i + '">' +
+        return '<div class="tab-panel' + (i===0?' active':'') + '" data-id="' + safeCityId + '-' + i + '">' +
           '<div class="weather-main"><div class="weather-icon">' + icon + '</div>' +
-          '<div class="temp-range"><span class="temp-max">' + (d.maxima??'—') + '°C</span>' +
-          '<span class="temp-min">' + (d.minima??'—') + '°C</span>' +
-          '<span class="condicao">' + (d.condicao||'—') + '</span></div></div>' +
+          '<div class="temp-range"><span class="temp-max">' + escapeHtml(d.maxima??'—') + '°C</span>' +
+          '<span class="temp-min">' + escapeHtml(d.minima??'—') + '°C</span>' +
+          '<span class="condicao">' + escapeHtml(d.condicao||'—') + '</span></div></div>' +
           '<div class="details-grid">' +
-          '<div class="detail-item"><div class="detail-label">💧 Precipitação</div><div class="detail-value">' + (d.milimetros||'—') + ' mm</div></div>' +
-          '<div class="detail-item"><div class="detail-label">💨 Vento</div><div class="detail-value">' + (d.vento||'—') + '</div></div>' +
+          '<div class="detail-item"><div class="detail-label">💧 Precipitação</div><div class="detail-value">' + escapeHtml(d.milimetros||'—') + ' mm</div></div>' +
+          '<div class="detail-item"><div class="detail-label">💨 Vento</div><div class="detail-value">' + escapeHtml(d.vento||'—') + '</div></div>' +
           '</div>' +
-          (pn > 0 ? '<div class="prob-bar-wrap"><div class="prob-bar-label"><span>Prob. chuva</span><span>' + (d.prob||'0%') + '</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:' + pn + '%"></div></div></div>' : '') +
+          (pn > 0 ? '<div class="prob-bar-wrap"><div class="prob-bar-label"><span>Prob. chuva</span><span>' + escapeHtml(d.prob||'0%') + '</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:' + pn + '%"></div></div></div>' : '') +
           '</div>';
       }).join('');
-      return '<div class="city-card"><div class="city-header"><h3>' + (city.nome||'Cidade') + '</h3><span class="city-id">#' + city.id + '</span></div>' +
+      return '<div class="city-card"><div class="city-header"><h3>' + escapeHtml(city.nome||'Cidade') + '</h3><span class="city-id">#' + safeCityId + '</span></div>' +
         (dias.length ? '<div class="tabs">' + tabs + '</div><div class="tab-panels">' + panels + '</div>' : '<div class="tab-panels" style="color:var(--muted);font-size:.85rem;">Sem dados disponíveis.</div>') +
         '</div>';
     }

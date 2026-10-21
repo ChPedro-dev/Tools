@@ -133,15 +133,27 @@ function removeCity(id) {
   updateBtn();
 }
 
+function escapeHtml(str) {
+  return String(str ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderTags() {
   tagsWrap.innerHTML = '';
   state.selected.forEach(city => {
     const tag = document.createElement('span');
     tag.className = 'tag';
-    tag.innerHTML =
-      city.nome +
-      ' <button aria-label="Remover ' + city.nome + '" data-id="' + city.id + '">&times;</button>';
-    tag.querySelector('button').addEventListener('click', () => removeCity(city.id));
+    tag.appendChild(document.createTextNode(city.nome + ' '));
+    const btn = document.createElement('button');
+    btn.setAttribute('aria-label', 'Remover ' + city.nome);
+    btn.dataset.id = city.id;
+    btn.textContent = '×';
+    btn.addEventListener('click', () => removeCity(city.id));
+    tag.appendChild(btn);
     tagsWrap.appendChild(tag);
   });
 }
@@ -183,7 +195,7 @@ async function fetchPrevisao() {
   } catch (e) {
     showToast('Erro na requisição: ' + e.message, 7000);
     prevPanel.innerHTML =
-      '<div class="state-box"><div class="icon">⚠️</div><p>' + e.message + '</p></div>';
+      '<div class="state-box"><div class="icon">⚠️</div><p>' + escapeHtml(e.message) + '</p></div>';
     resHeader.style.display = 'none';
   } finally {
     state.loading = false;
@@ -270,11 +282,12 @@ function renderResults(cities, acao) {
 /* ── Card de uma cidade ── */
 function renderCard(city) {
   const dias = city.dias || [];
+  const safeCityId = escapeHtml(city.id);
 
   const tabs = dias.map((d, i) =>
     '<button class="day-tab' + (i === 0 ? ' active' : '') +
-    '" data-panel="' + city.id + '-' + i + '">' +
-    (d.dia || 'Dia ' + (i + 1)) + '</button>'
+    '" data-panel="' + safeCityId + '-' + i + '">' +
+    escapeHtml(d.dia || 'Dia ' + (i + 1)) + '</button>'
   ).join('');
 
   const panels = dias.map((d, i) => {
@@ -282,22 +295,22 @@ function renderCard(city) {
     const pn   = probNum(d.prob);
     return (
       '<div class="day-panel' + (i === 0 ? ' active' : '') +
-      '" data-id="' + city.id + '-' + i + '">' +
+      '" data-id="' + safeCityId + '-' + i + '">' +
         '<div class="weather-main">' +
           '<span class="weather-icon">' + icon + '</span>' +
           '<div class="temp-block">' +
-            '<span class="temp-max">' + (d.maxima !== undefined ? d.maxima : '—') + '°C</span>' +
-            '<span class="temp-min">' + (d.minima !== undefined ? d.minima : '—') + '°C</span>' +
-            '<span class="condicao-txt">' + (d.condicao || '—') + '</span>' +
+            '<span class="temp-max">' + escapeHtml(d.maxima !== undefined ? d.maxima : '—') + '°C</span>' +
+            '<span class="temp-min">' + escapeHtml(d.minima !== undefined ? d.minima : '—') + '°C</span>' +
+            '<span class="condicao-txt">' + escapeHtml(d.condicao || '—') + '</span>' +
           '</div>' +
         '</div>' +
         '<div class="day-details">' +
-          '<div class="detail-box"><div class="lbl">💧 Precipitação</div><div class="val">' + (d.milimetros || '—') + ' mm</div></div>' +
-          '<div class="detail-box"><div class="lbl">💨 Vento</div><div class="val">' + (d.vento || '—') + '</div></div>' +
+          '<div class="detail-box"><div class="lbl">💧 Precipitação</div><div class="val">' + escapeHtml(d.milimetros || '—') + ' mm</div></div>' +
+          '<div class="detail-box"><div class="lbl">💨 Vento</div><div class="val">' + escapeHtml(d.vento || '—') + '</div></div>' +
         '</div>' +
         (pn > 0 ?
           '<div class="prob-bar-wrap">' +
-            '<div class="prob-bar-lbl"><span>Prob. chuva</span><span>' + (d.prob || '0%') + '</span></div>' +
+            '<div class="prob-bar-lbl"><span>Prob. chuva</span><span>' + escapeHtml(d.prob || '0%') + '</span></div>' +
             '<div class="prob-bar-bg"><div class="prob-bar-fill" style="width:' + pn + '%"></div></div>' +
           '</div>' : '') +
       '</div>'
@@ -307,8 +320,8 @@ function renderCard(city) {
   return (
     '<div class="prev-card">' +
       '<div class="prev-card-header">' +
-        '<h3>' + (city.nome || 'Cidade') + '</h3>' +
-        '<span class="city-id-badge">#' + city.id + '</span>' +
+        '<h3>' + escapeHtml(city.nome || 'Cidade') + '</h3>' +
+        '<span class="city-id-badge">#' + safeCityId + '</span>' +
       '</div>' +
       (dias.length
         ? '<div class="day-tabs">' + tabs + '</div><div class="day-panels">' + panels + '</div>'

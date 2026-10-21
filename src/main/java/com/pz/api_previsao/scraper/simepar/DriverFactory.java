@@ -15,12 +15,11 @@ public class DriverFactory {
 
         options.addArguments(
                 "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/117 Safari/537.36");
-        options.addArguments( "--no-sandbox", "--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         options.addArguments("--start-maximized");
         options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--disable-blink-features=AutomationControlled");
-        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36...");
 
         // prefer an explicitly provided chromedriver binary to avoid SeleniumManager network calls
         String configuredPath = System.getProperty("webdriver.chrome.driver");
@@ -35,14 +34,11 @@ public class DriverFactory {
                         .usingDriverExecutable(driverExe)
                         .usingAnyFreePort()
                         .build();
-                WebDriver driver = new ChromeDriver(service, options);
-                return driver;
+                return new ChromeDriver(service, options);
             }
         }
 
-        WebDriver driver = new ChromeDriver(options);
-
-        return driver;
+        return new ChromeDriver(options);
 
     }
 

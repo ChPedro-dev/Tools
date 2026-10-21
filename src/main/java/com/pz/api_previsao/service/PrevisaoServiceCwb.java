@@ -14,7 +14,7 @@ import com.pz.api_previsao.util.Normalizacao;
 import com.pz.api_previsao.util.SleepAleatorio;
 import com.pz.dto.CidadeDto;
 
-@Service 
+@Service
 public class PrevisaoServiceCwb {
 
     final Normalizacao normalizacao;
@@ -31,50 +31,49 @@ public class PrevisaoServiceCwb {
 
     public List<Cidade> servico(String acao, List<CidadeDto> cidadesSelecionadas) throws InterruptedException, IOException {
 
+        List<Cidade> cidades = filtro.selecionarIds(cidadesSelecionadas);
         WebDriver driver = DriverFactory.getDriver();
 
-        List<Cidade> cidades = filtro.selecionarIds(cidadesSelecionadas);
+        try {
+            for (Cidade cidade : cidades) {
 
-        for (Cidade cidade : cidades) {
+                driver.get("https://www.simepar.br/simepar/forecast_by_counties/" + cidade.getId());
 
-            driver.get("https://www.simepar.br/simepar/forecast_by_counties/" + cidade.getId());
+                System.out.println("Cidade: " + cidade.getNome() + " (" + cidade.getId() + ")");
 
-            System.out.println("Cidade: " + cidade.getId());
+                Thread.sleep(15000); // espera a página carregar
 
-            Thread.sleep(15000); // espera a página carregar
+                int[] max = dados.maximas(driver);
+                int[] min = dados.minimas(driver);
 
-            int[] max = dados.maximas(driver);
-            int[] min = dados.minimas(driver);
+                String[] icones = dados.icones(driver);
+                String[] dia = dados.dia(driver);
 
-            String[] icones = dados.icones(driver);
-            String[] dia = dados.dia(driver);
+                String[] infos1 = new String[] { "", "", "" };
+                String[] infos2 = new String[] { "", "", "" };
 
-            String[] infos1 = new String[5] ;
-            String[] infos2 = new String[5] ;
-
-            switch(acao)
-            {
-                case "BDL" ->{
-                    infos1 = dados.infos(driver);
-                } 
-                case "LU" -> {
-                    infos2 = dados.infos2(driver);
+                switch (acao != null ? acao : "") {
+                    case "BDL" -> {
+                        infos1 = dados.infos(driver);
+                    }
+                    case "LU" -> {
+                        infos2 = dados.infos2(driver);
+                    }
+                    case "buscar_previsao" -> {
+                        infos1 = dados.infos(driver);
+                        infos2 = dados.infos2(driver);
+                    }
+                    case "18h" -> {
+                        infos1 = dados.infos(driver);
+                        infos2 = dados.infos2(driver);
+                    }
+                    default -> {
+                        infos1 = new String[] { "", "", "" };
+                        infos2 = new String[] { "", "", "" };
+                    }
                 }
-                case "18h" -> {
-                    infos1 = new String[] { "", "", "" };
-                    infos2 = new String[] { "", "", "" };
-                }
-                default ->{
-                    infos1 = new String[] { "", "", "" };
-                    infos2 = new String[] { "", "", "" };
-                }
-            }
 
-            for (int i = 0; i < cidades.size(); i++) {
-
-                // Puxa a lista de dias apenas uma vez por cidade
-                // List<Dia> dias = cidades.get(i).getDias();
-                Dia[] dias = cidades.get(i).getDias(); 
+                Dia[] dias = new Dia[5];
 
                 for (int j = 0; j < 5; j++) {
 
@@ -84,15 +83,11 @@ public class PrevisaoServiceCwb {
                     diaAtual.setMaxima(max[j]);
                     diaAtual.setMinima(min[j] == 0 ? max[j] - 2 : min[j]);
 
-                    normalizacao.setIconeIndex(icones[j]);
-                    diaAtual.setIconeIndex(normalizacao.getIconeIndex());
+                    diaAtual.setIconeIndex(Normalizacao.obterIconeIndex(icones[j]));
+                    diaAtual.setCondicao(Normalizacao.normalizarCondicao(icones[j]));
 
-                    normalizacao.setCondicao(icones[j]);
-                    diaAtual.setCondicao(normalizacao.getCondicao());
-                
-                    switch (i) {
+                    switch (j) {
                         case 0 -> {
-                            // ATENÇÃO: infos[0] vai se repetir para todos os 'j' desta cidade
                             diaAtual.setMilimetros(infos1[0]);
                             diaAtual.setProb(infos1[1]);
                             diaAtual.setVento(infos1[2]);
@@ -111,10 +106,13 @@ public class PrevisaoServiceCwb {
 
                     dias[j] = diaAtual;
                 }
+
+                cidade.setDias(dias);
             }
 
+            return cidades;
+        } finally {
+            driver.quit();
         }
-        driver.close();
-        return cidades;
     }
 }

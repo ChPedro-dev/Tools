@@ -50,84 +50,82 @@ public class PrevisaoService {
         // lista com TODAS as cidades
         List<Map<String, Object>> listaCidades = new ArrayList<>();
 
-        for (Map.Entry<String, Integer> entry : cidadeMap.entrySet()) {
+        try {
+            for (Map.Entry<String, Integer> entry : cidadeMap.entrySet()) {
 
-            driver.get("https://www.simepar.br/simepar/forecast_by_counties/" + entry.getValue());
+                driver.get("https://www.simepar.br/simepar/forecast_by_counties/" + entry.getValue());
 
-            System.out.println("Cidade: " + entry.getKey());
-            
-            Thread.sleep(15000); // espera a página carregar
+                System.out.println("Cidade: " + entry.getKey());
 
-            int[] max = dados.maximas(driver);
-            int[] min = dados.minimas(driver);
-            
-            String[] icones = dados.icones(driver);
-            String[] dia = dados.dia(driver);
-            
-            String[] infos = dados.infos(driver);
-            String[] infos2;
+                Thread.sleep(15000); // espera a página carregar
 
-            if(acao.equals("LU")){
-                infos2 = dados.infos2(driver);
-            }else{
-                infos2 = new String[]{"", "", ""};
-            }
-            
-            Map<String, Object> cidadeJson = new LinkedHashMap<>();
-            cidadeJson.put("cidade", entry.getKey());
-           
+                int[] max = dados.maximas(driver);
+                int[] min = dados.minimas(driver);
 
-            List<Map<String, Object>> previsoes = new ArrayList<>();
+                String[] icones = dados.icones(driver);
+                String[] dia = dados.dia(driver);
 
-            for (int i = 0; i < 5; i++) {
+                String[] infos = dados.infos(driver);
+                String[] infos2;
 
-                Map<String, Object> diaJson = new LinkedHashMap<>();
-                diaJson.put("dia", dia[i]);
-                diaJson.put("maxima", String.valueOf(max[i]));
-                diaJson.put("minima", String.valueOf(min[i] == 0 ? max[i] - 2 : min[i]));
-
-                normalizacao.setCondicao(icones[i]);
-                diaJson.put("condicao", normalizacao.getCondicao());
-
-                normalizacao.setIconeIndex(icones[i]);
-                diaJson.put("index", normalizacao.getIconeIndex());
-
-                switch (i) {
-                    case 0 -> {
-                        diaJson.put("precipitacao", infos[0]);
-                        diaJson.put("probabilidade", infos[1]);
-                        diaJson.put("vento", infos[2]);
-                    }
-                    case 1 -> {
-                        diaJson.put("precipitacao", infos2[0]);
-                        diaJson.put("probabilidade", infos2[1]);
-                        diaJson.put("vento", infos2[2]);
-                    }
-                    default -> {
-                        diaJson.put("precipitacao", "");
-                        diaJson.put("probabilidade", "");
-                        diaJson.put("vento", "");
-                    }
+                if ("LU".equals(acao)) {
+                    infos2 = dados.infos2(driver);
+                } else {
+                    infos2 = new String[] { "", "", "" };
                 }
-                previsoes.add(diaJson);
+
+                Map<String, Object> cidadeJson = new LinkedHashMap<>();
+                cidadeJson.put("cidade", entry.getKey());
+
+                List<Map<String, Object>> previsoes = new ArrayList<>();
+
+                for (int i = 0; i < 5; i++) {
+
+                    Map<String, Object> diaJson = new LinkedHashMap<>();
+                    diaJson.put("dia", dia[i]);
+                    diaJson.put("maxima", String.valueOf(max[i]));
+                    diaJson.put("minima", String.valueOf(min[i] == 0 ? max[i] - 2 : min[i]));
+
+                    diaJson.put("condicao", Normalizacao.normalizarCondicao(icones[i]));
+                    diaJson.put("index", Normalizacao.obterIconeIndex(icones[i]));
+
+                    switch (i) {
+                        case 0 -> {
+                            diaJson.put("precipitacao", infos[0]);
+                            diaJson.put("probabilidade", infos[1]);
+                            diaJson.put("vento", infos[2]);
+                        }
+                        case 1 -> {
+                            diaJson.put("precipitacao", infos2[0]);
+                            diaJson.put("probabilidade", infos2[1]);
+                            diaJson.put("vento", infos2[2]);
+                        }
+                        default -> {
+                            diaJson.put("precipitacao", "");
+                            diaJson.put("probabilidade", "");
+                            diaJson.put("vento", "");
+                        }
+                    }
+                    previsoes.add(diaJson);
+                }
+
+                cidadeJson.put("previsoes", previsoes);
+                listaCidades.add(cidadeJson); // adiciona cidade na lista
+
+                sleepAleatorio.sleep();
+
+                System.out.println("-----------------------------");
+                System.out.println(previsoes.get(0).get("dia") + " - " + cidadeJson.get("cidade") + " - " + cidadeJson.get("previsoes"));
+
+                if ("BDL".equals(acao) && "Fazenda Rio Grande".equals(entry.getKey())) {
+                    break;
+                }
             }
 
-            cidadeJson.put("previsoes", previsoes);
-            listaCidades.add(cidadeJson); // adiciona cidade na lista
-
-            sleepAleatorio.sleep();
-
-            System.out.println("-----------------------------");
-            System.out.println(cidadeJson.get(previsoes.get(0).get("dia")) + " - " + cidadeJson.get("cidade") + " - " + cidadeJson.get("previsoes"));
-            
-            if (acao.equals("BDL") && entry.getKey().equals("Fazenda Rio Grande") == true) {
-                break;
-            }
+            return listaCidades; // retorna TODAS
+        } finally {
+            driver.quit();
         }
-
-        driver.close();
-        return listaCidades; // retorna TODAS
-
     }
 
 }
