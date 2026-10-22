@@ -3,9 +3,7 @@ package com.pz.api_previsao.model;
 
 import lombok.EqualsAndHashCode;
 
-/**
- * Cidade
- */
+
 @EqualsAndHashCode(callSuper=false)
 public class Cidade {
 

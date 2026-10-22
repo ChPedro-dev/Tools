@@ -1,477 +1,313 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Previsão do Tempo — SIMEPAR</title>
+  <title>Previsão do Tempo — SIMEPAR | Painel Meteorológico</title>
+  <link rel="icon" href="IMGS/toolbox-solid-full.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0f1117; --surface: #1a1d27; --surface2: #22263a;
-      --border: #2e3250; --accent: #4f7cff; --accent-h: #6e93ff;
-      --success: #22c55e; --warn: #f59e0b; --danger: #ef4444;
-      --text: #e8eaf6; --muted: #7c82a8; --radius: 12px;
-      --shadow: 0 4px 24px rgba(0,0,0,.45);
-    }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 24px 16px 64px; }
-    header { max-width: 960px; margin: 0 auto 36px; display: flex; align-items: center; gap: 14px; }
-    .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--accent), #a78bfa); border-radius: 10px; display: grid; place-items: center; font-size: 22px; }
-    header h1 { font-size: 1.4rem; font-weight: 700; }
-    header p { font-size: .8rem; color: var(--muted); margin-top: 2px; }
-    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-    #panel { max-width: 960px; margin: 0 auto 32px; }
-    #panel h2 { font-size: .95rem; font-weight: 600; margin-bottom: 18px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-    .search-wrap { position: relative; }
-    .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
-    #cidade-search { width: 100%; padding: 10px 12px 10px 38px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: .9rem; outline: none; transition: border-color .2s; }
-    #cidade-search:focus { border-color: var(--accent); }
-    #cidade-search::placeholder { color: var(--muted); }
-    #dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; max-height: 220px; overflow-y: auto; z-index: 100; box-shadow: var(--shadow); display: none; }
-    #dropdown.open { display: block; }
-    .dd-item { padding: 9px 14px; cursor: pointer; font-size: .88rem; transition: background .15s; }
-    .dd-item:hover { background: var(--border); }
-    .dd-empty { padding: 10px 14px; color: var(--muted); font-size: .85rem; }
-    #tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; min-height: 10px; }
-    .tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(79,124,255,.18); border: 1px solid rgba(79,124,255,.35); color: var(--accent-h); border-radius: 20px; padding: 4px 10px 4px 12px; font-size: .8rem; font-weight: 500; animation: pop .2s ease; }
-    .tag button { background: none; border: none; color: var(--accent-h); cursor: pointer; font-size: .95rem; line-height: 1; padding: 0; opacity: .7; transition: opacity .15s; }
-    .tag button:hover { opacity: 1; }
-    @keyframes pop { from { transform: scale(.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .acao-row { display: flex; gap: 10px; margin-top: 18px; align-items: flex-end; flex-wrap: wrap; }
-    .field-group { display: flex; flex-direction: column; gap: 6px; flex: 1 1 200px; }
-    .field-group label { font-size: .78rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
-    .field-group select, .field-group input[type="text"] { padding: 10px 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: .9rem; outline: none; transition: border-color .2s; font-family: inherit; }
-    .field-group select:focus, .field-group input[type="text"]:focus { border-color: var(--accent); }
-    .field-group select option { background: var(--surface2); }
-    #btn-buscar { padding: 10px 26px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .2s, transform .1s; white-space: nowrap; align-self: flex-end; display: flex; align-items: center; gap: 8px; }
-    #btn-buscar:hover:not(:disabled) { background: var(--accent-h); }
-    #btn-buscar:active:not(:disabled) { transform: scale(.97); }
-    #btn-buscar:disabled { opacity: .5; cursor: not-allowed; }
-    #btn-salvar { padding: 10px 22px; background: var(--success); color: #fff; border: none; border-radius: 8px; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .2s, transform .1s; white-space: nowrap; align-self: flex-end; display: flex; align-items: center; gap: 8px; }
-    #btn-salvar:hover:not(:disabled) { background: #16a34a; }
-    #btn-salvar:active:not(:disabled) { transform: scale(.97); }
-    #btn-salvar:disabled { opacity: .5; cursor: not-allowed; }
-    #toast.success { background: var(--success); }
-    #btn-carregar { padding: 10px 22px; background: var(--warn); color: #fff; border: none; border-radius: 8px; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .2s, transform .1s; white-space: nowrap; align-self: flex-end; display: flex; align-items: center; gap: 8px; }
-    #btn-carregar:hover:not(:disabled) { background: #d97706; }
-    #btn-carregar:active:not(:disabled) { transform: scale(.97); }
-    #btn-carregar:disabled { opacity: .5; cursor: not-allowed; }
-    #toast { position: fixed; bottom: 24px; right: 24px; background: var(--danger); color: #fff; padding: 12px 18px; border-radius: 10px; font-size: .88rem; font-weight: 500; box-shadow: var(--shadow); display: none; z-index: 999; max-width: 340px; animation: slideup .3s ease; }
-    @keyframes slideup { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .skeleton-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 960px; margin: 0 auto; }
-    .skeleton-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; animation: pulse 1.4s ease-in-out infinite; }
-    .skel { background: var(--border); border-radius: 6px; }
-    .skel-title { height: 18px; width: 60%; margin-bottom: 16px; }
-    .skel-row { height: 12px; margin-bottom: 10px; }
-    .skel-row.w80 { width: 80%; }
-    .skel-row.w60 { width: 60%; }
-    .skel-row.w70 { width: 70%; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-    #results-header { max-width: 960px; margin: 0 auto 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
-    #results-header h2 { font-size: 1rem; font-weight: 600; }
-    #results-header span { font-size: .8rem; color: var(--muted); }
-    .badge { background: rgba(79,124,255,.2); color: var(--accent-h); border-radius: 20px; padding: 3px 10px; font-size: .78rem; font-weight: 600; }
-    .city-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px; max-width: 960px; margin: 0 auto; }
-    .city-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 0; overflow: hidden; box-shadow: var(--shadow); transition: transform .2s, border-color .2s; }
-    .city-card:hover { transform: translateY(-2px); border-color: var(--accent); }
-    .city-header { padding: 16px 20px 14px; background: linear-gradient(135deg, rgba(79,124,255,.12), rgba(167,139,250,.08)); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .city-header h3 { font-size: 1rem; font-weight: 700; }
-    .city-id { font-size: .72rem; color: var(--muted); background: var(--surface2); padding: 2px 8px; border-radius: 20px; }
-    .tabs { display: flex; border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
-    .tabs::-webkit-scrollbar { display: none; }
-    .tab-btn { flex-shrink: 0; padding: 9px 14px; font-size: .78rem; font-weight: 500; background: none; border: none; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; white-space: nowrap; }
-    .tab-btn.active { color: var(--accent-h); border-bottom-color: var(--accent); }
-    .tab-btn:hover:not(.active) { color: var(--text); }
-    .tab-panels { padding: 18px 20px 20px; }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; animation: fadein .2s ease; }
-    @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
-    .weather-main { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
-    .weather-icon { font-size: 2.6rem; line-height: 1; }
-    .temp-range { display: flex; flex-direction: column; }
-    .temp-max { font-size: 1.5rem; font-weight: 700; color: var(--warn); }
-    .temp-min { font-size: .95rem; color: var(--accent-h); }
-    .condicao { font-size: .85rem; color: var(--muted); margin-top: 2px; }
-    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .detail-item { background: var(--surface2); border-radius: 8px; padding: 10px 12px; }
-    .detail-label { font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
-    .detail-value { font-size: .92rem; font-weight: 600; }
-    .prob-bar-wrap { margin-top: 14px; }
-    .prob-bar-label { font-size: .72rem; color: var(--muted); margin-bottom: 5px; display: flex; justify-content: space-between; }
-    .prob-bar-bg { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-    .prob-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #a78bfa); border-radius: 3px; transition: width .5s ease; }
-    .state-box { max-width: 960px; margin: 0 auto; text-align: center; padding: 60px 20px; color: var(--muted); }
-    .state-box .icon { font-size: 3rem; margin-bottom: 16px; }
-    .state-box p { font-size: .95rem; }
-    .state-box.error .icon { color: var(--danger); }
-    .spin { animation: rotation .7s linear infinite; }
-    @keyframes rotation { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-  </style>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="css/index.css" />
 </head>
-<body>
+<body class="min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500/30 selection:text-indigo-200 flex flex-col">
 
-  <header>
-    <div class="logo-icon">&#127782;</div>
-    <div>
-      <h1>Previsão do Tempo</h1>
-      <p>Dados meteorológicos via SIMEPAR</p>
+  <!-- Background decorativo sutil -->
+  <div class="pointer-events-none fixed inset-x-0 top-0 -z-10 h-96 bg-gradient-to-b from-indigo-950/35 via-slate-950/60 to-transparent" aria-hidden="true"></div>
+
+  <!-- Cabeçalho Principal -->
+  <header class="border-b border-slate-800/80 bg-slate-950/80 backdrop-blur-md sticky top-0 z-30">
+    <div class="mx-auto max-w-6xl px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5">
+        <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-sky-500 text-2xl shadow-lg shadow-indigo-500/20" aria-hidden="true">
+          ⛅
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white">Previsão do Tempo</h1>
+            <span class="rounded-full bg-indigo-500/15 border border-indigo-500/30 px-2.5 py-0.5 text-[11px] font-semibold text-indigo-300">
+              SIMEPAR
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Monitoramento e coleta meteorológica automatizada dos municípios do Paraná</p>
+        </div>
+      </div>
+
+      <!-- Indicadores de Status -->
+      <div class="flex items-center gap-3 text-xs">
+        <div class="flex items-center gap-2 rounded-xl bg-slate-900 border border-slate-800 px-3 py-1.5 text-slate-300">
+          <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true"></span>
+          <span id="status-cities-total" class="font-medium">Carregando base…</span>
+        </div>
+        <div class="flex items-center gap-1.5 rounded-xl bg-slate-900 border border-slate-800 px-3 py-1.5 text-slate-400" title="Horário da última coleta no servidor">
+          <svg class="h-3.5 w-3.5 text-sky-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .414.336.75.75.75h4a.75.75 0 000-1.5h-3.25V5z" clip-rule="evenodd" />
+          </svg>
+          <span>Última coleta:</span>
+          <strong id="status-horario" class="font-mono text-slate-200">—</strong>
+        </div>
+      </div>
     </div>
   </header>
 
-  <section id="panel" class="card">
-    <h2>Consulta</h2>
-    <div class="search-wrap" id="search-container">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-           fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <input id="cidade-search" type="text" placeholder="Pesquisar cidade…" autocomplete="off" aria-label="Pesquisar cidade" />
-      <div id="dropdown" role="listbox"></div>
-    </div>
-    <div id="tags-wrap" aria-label="Cidades selecionadas"></div>
-    <div class="acao-row">
-      <div class="field-group">
-        <label for="acao-select">Ação</label>
-        <select id="acao-select">
-          <option value="buscar_previsao">buscar_previsao</option>
-          <option value="BDL">BDL</option>
-          <option value="LU">LU</option>
-          <option value="18h">18h</option>
-          <option value="custom">Personalizada…</option>
-        </select>
+  <!-- Conteúdo Principal -->
+  <main class="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6 py-8 space-y-8">
+
+    <!-- Painel de Consulta e Seleção de Municípios -->
+    <section aria-labelledby="consulta-heading" class="rounded-2xl bg-slate-900/90 border border-slate-800/90 p-5 sm:p-6 shadow-2xl shadow-black/40">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+        <div class="flex items-center gap-2">
+          <h2 id="consulta-heading" class="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            Configuração da Consulta
+          </h2>
+          <span id="selected-counter" class="rounded-full bg-slate-800 px-2.5 py-0.5 text-xs font-mono text-slate-300">
+            0 selecionadas
+          </span>
+        </div>
+
+        <!-- Atalhos Rápidos de Regiões -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs text-slate-500 hidden sm:inline">Atalhos:</span>
+          <button
+            type="button"
+            id="btn-preset-principais"
+            class="rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/70 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          >
+            + Principais PR
+          </button>
+          <button
+            type="button"
+            id="btn-preset-litoral"
+            class="rounded-lg bg-slate-800/80 hover:bg-slate-800 border border-slate-700/70 px-2.5 py-1 text-xs font-medium text-slate-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          >
+            + Litoral PR
+          </button>
+          <button
+            type="button"
+            id="btn-clear-selected"
+            class="hidden rounded-lg bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/25 px-2.5 py-1 text-xs font-medium text-rose-300 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400"
+          >
+            Limpar seleção
+          </button>
+        </div>
       </div>
-      <div class="field-group" id="custom-acao-wrap" style="display:none;">
-        <label for="acao-custom">Ação personalizada</label>
-        <input type="text" id="acao-custom" placeholder="ex: outra_acao" />
+
+      <!-- Campo de Busca Autocomplete Acessível (Combobox) -->
+      <div class="relative" id="search-container">
+        <label for="cidade-search" class="sr-only">Pesquisar município do Paraná</label>
+        <div class="relative flex items-center">
+          <svg class="pointer-events-none absolute left-3.5 h-4 w-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            id="cidade-search"
+            type="text"
+            role="combobox"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-controls="dropdown"
+            placeholder="Digite o nome ou código IBGE do município (use ↑ ↓ e Enter para selecionar)…"
+            autocomplete="off"
+            class="w-full rounded-xl bg-slate-950/90 border border-slate-800 pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 transition-colors duration-200 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          />
+        </div>
+
+        <!-- Lista suspensa de resultados -->
+        <div
+          id="dropdown"
+          role="listbox"
+          aria-label="Sugestões de municípios"
+          class="hidden absolute left-0 right-0 top-[calc(100%+6px)] z-40 max-h-60 overflow-y-auto rounded-xl bg-slate-900 border border-slate-700/80 shadow-2xl divide-y divide-slate-800/60"
+        ></div>
       </div>
-      <button id="btn-buscar" disabled>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-        Buscar previsão
-      </button>
-      <button id="btn-salvar" disabled>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-          <polyline points="17 21 17 13 7 13 7 21"/>
-          <polyline points="7 3 7 8 15 8"/>
-        </svg>
-        Salvar lista
-      </button>
-      <button id="btn-carregar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/>
-          <line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-        Carregar lista salva
-      </button>
+
+      <!-- Lista de Chips das Cidades Selecionadas -->
+      <div
+        id="tags-wrap"
+        aria-live="polite"
+        aria-label="Municípios selecionados"
+        class="mt-3.5 flex flex-wrap items-center gap-2 min-h-[28px]"
+      ></div>
+
+      <!-- Linha de Ação e Controles -->
+      <div class="mt-5 pt-5 border-t border-slate-800/80 flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-end gap-3 flex-1">
+          <div class="flex flex-col gap-1.5 sm:w-56">
+            <label for="acao-select" class="text-xs font-medium text-slate-400">
+              Modo de Coleta (Ação)
+            </label>
+            <select
+              id="acao-select"
+              class="rounded-xl bg-slate-950 border border-slate-800 px-3.5 py-2.5 text-sm text-slate-100 transition-colors duration-200 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            >
+              <option value="buscar_previsao">Completa (buscar_previsao)</option>
+              <option value="BDL">Boletim Dia 1 (BDL)</option>
+              <option value="LU">Boletim Dia 2 (LU)</option>
+              <option value="18h">Boletim 18h (18h)</option>
+              <option value="custom">Personalizada…</option>
+            </select>
+          </div>
+
+          <div id="custom-acao-wrap" class="hidden flex-col gap-1.5 sm:w-56">
+            <label for="acao-custom" class="text-xs font-medium text-slate-400">
+              Identificador da Ação
+            </label>
+            <input
+              type="text"
+              id="acao-custom"
+              placeholder="ex: outra_acao"
+              class="rounded-xl bg-slate-950 border border-slate-800 px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 transition-colors duration-200 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+            />
+          </div>
+        </div>
+
+        <!-- Grupo de Botões de Ação -->
+        <div class="flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            id="btn-cache"
+            title="Exibir última previsão salva em cache no servidor sem aguardar novo scraping"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-[0.98] disabled:opacity-45 disabled:pointer-events-none border border-slate-700 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-slate-200 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          >
+            <svg class="h-4 w-4 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <ellipse cx="12" cy="5" rx="9" ry="3" />
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+            </svg>
+            <span>Ver Cache</span>
+          </button>
+
+          <button
+            type="button"
+            id="btn-carregar"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-[0.98] disabled:opacity-45 disabled:pointer-events-none border border-amber-500/30 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-amber-300 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span>Carregar Lista</span>
+          </button>
+
+          <button
+            type="button"
+            id="btn-salvar"
+            disabled
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 active:scale-[0.98] disabled:opacity-45 disabled:pointer-events-none border border-emerald-500/30 px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-emerald-300 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            <span>Salvar Lista</span>
+          </button>
+
+          <button
+            type="button"
+            id="btn-buscar"
+            disabled
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-[0.98] disabled:opacity-45 disabled:pointer-events-none px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          >
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+            <span>Buscar Previsão</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner de Progresso durante Scraping -->
+    <div
+      id="loading-banner"
+      role="status"
+      aria-live="polite"
+      class="hidden rounded-2xl bg-indigo-950/50 border border-indigo-500/30 px-5 py-3.5 flex items-center justify-between gap-4 animate-fade-slide"
+    >
+      <div class="flex items-center gap-3">
+        <span class="relative flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+        </span>
+        <p id="loading-elapsed" class="text-xs sm:text-sm font-medium text-indigo-200">
+          Coletando dados no SIMEPAR…
+        </p>
+      </div>
+      <span class="text-[11px] text-indigo-300/80 hidden sm:inline">
+        A coleta via WebDriver leva cerca de 10s por município
+      </span>
     </div>
-  </section>
 
-  <div id="results-header" style="display:none;">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <h2>Resultados</h2>
-      <span id="result-count" class="badge"></span>
+    <!-- Cabeçalho e Ferramentas dos Resultados -->
+    <div
+      id="results-header"
+      class="hidden flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-800/80"
+    >
+      <div class="flex flex-wrap items-center gap-3">
+        <h2 class="text-base font-bold text-white">Previsões Meteorológicas</h2>
+        <span id="result-count" class="rounded-full bg-indigo-500/20 border border-indigo-500/30 px-2.5 py-0.5 text-xs font-semibold text-indigo-300"></span>
+        <span id="result-meta" class="text-xs text-slate-400 font-mono"></span>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <div class="relative">
+          <label for="result-filter" class="sr-only">Filtrar cidades nos resultados</label>
+          <input
+            id="result-filter"
+            type="search"
+            placeholder="Filtrar nos resultados…"
+            class="w-44 sm:w-52 rounded-xl bg-slate-900 border border-slate-800 px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:border-indigo-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          />
+        </div>
+        <button
+          type="button"
+          id="btn-copy-json"
+          class="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 px-3 py-1.5 text-xs font-medium text-slate-300 hover:text-white transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+          title="Copiar JSON dos resultados"
+        >
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          <span>Copiar JSON</span>
+        </button>
+      </div>
     </div>
-    <span id="result-meta"></span>
-  </div>
 
-  <div id="output"></div>
-  <div id="toast" role="alert"></div>
+    <!-- Área de Renderização dos Cards -->
+    <div id="output" aria-live="polite"></div>
 
-  <script>
-    const state = { allCities: [], selected: [], loading: false };
+  </main>
 
-    const searchEl   = document.getElementById('cidade-search');
-    const dropdown   = document.getElementById('dropdown');
-    const tagsWrap   = document.getElementById('tags-wrap');
-    const acaoSel    = document.getElementById('acao-select');
-    const customWrap = document.getElementById('custom-acao-wrap');
-    const customIn   = document.getElementById('acao-custom');
-    const btnBuscar  = document.getElementById('btn-buscar');
-    const btnSalvar  = document.getElementById('btn-salvar');
-    const btnCarregar = document.getElementById('btn-carregar');
-    const output     = document.getElementById('output');
-    const resHeader  = document.getElementById('results-header');
-    const resMeta    = document.getElementById('result-meta');
-    const resCount   = document.getElementById('result-count');
-    const toast      = document.getElementById('toast');
+  <!-- Rodapé Semântico -->
+  <footer class="border-t border-slate-900/80 py-6 text-center text-xs text-slate-500">
+    <p>Painel Meteorológico SIMEPAR · Desenvolvido com foco em Acessibilidade (a11y) e Performance</p>
+  </footer>
 
-    function showToast(msg, duration = 4000, isSuccess = false) {
-      toast.textContent = msg;
-      toast.className = isSuccess ? 'success' : '';
-      toast.style.display = 'block';
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(() => { toast.style.display = 'none'; toast.className = ''; }, duration);
-    }
+  <!-- Container de Notificações Toast -->
+  <div
+    id="toast-container"
+    aria-live="polite"
+    class="pointer-events-none fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full px-4 sm:px-0"
+  ></div>
 
-    function getAcao() {
-      return acaoSel.value === 'custom' ? customIn.value.trim() : acaoSel.value;
-    }
-
-    function updateBtn() {
-      const hasSelection = state.selected.length > 0;
-      btnBuscar.disabled = !hasSelection || state.loading;
-      btnSalvar.disabled = !hasSelection || state.loading;
-    }
-
-    async function loadCities() {
-      try {
-        const res = await fetch('/cidades');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        state.allCities = await res.json();
-      } catch(e) {
-        showToast('Erro ao carregar cidades: ' + e.message, 6000);
-        output.innerHTML = '<div class="state-box error"><div class="icon">⚠️</div><p>Não foi possível carregar as cidades.<br>Verifique se a API está em execução.</p></div>';
-      }
-    }
-
-    function renderDropdown(query) {
-      const q = query.toLowerCase();
-      const ids = new Set(state.selected.map(c => c.id));
-      const filtered = state.allCities
-        .filter(c => !ids.has(c.id) && (c.nome.toLowerCase().includes(q) || (c.busca||'').toLowerCase().includes(q)))
-        .slice(0, 60);
-      dropdown.innerHTML = '';
-      if (!filtered.length) {
-        dropdown.innerHTML = '<div class="dd-empty">Nenhuma cidade encontrada</div>';
-      } else {
-        filtered.forEach(city => {
-          const el = document.createElement('div');
-          el.className = 'dd-item';
-          el.textContent = city.nome;
-          el.addEventListener('mousedown', e => { e.preventDefault(); selectCity(city); });
-          dropdown.appendChild(el);
-        });
-      }
-      dropdown.classList.add('open');
-    }
-
-    function closeDropdown() { dropdown.classList.remove('open'); dropdown.innerHTML = ''; }
-
-    searchEl.addEventListener('input', () => {
-      const q = searchEl.value.trim();
-      if (!q) { closeDropdown(); return; }
-      renderDropdown(q);
-    });
-    searchEl.addEventListener('focus', () => { if (searchEl.value.trim()) renderDropdown(searchEl.value.trim()); });
-    searchEl.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDropdown(); searchEl.blur(); } });
-    document.addEventListener('click', e => { if (!document.getElementById('search-container').contains(e.target)) closeDropdown(); });
-
-    function selectCity(city) {
-      if (state.selected.find(c => c.id === city.id)) return;
-      state.selected.push(city);
-      searchEl.value = '';
-      closeDropdown();
-      renderTags();
-      updateBtn();
-    }
-
-    function removeCity(id) {
-      state.selected = state.selected.filter(c => c.id !== id);
-      renderTags();
-      updateBtn();
-    }
-
-    function escapeHtml(str) {
-      return String(str ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
-    }
-
-    function renderTags() {
-      tagsWrap.innerHTML = '';
-      state.selected.forEach(city => {
-        const tag = document.createElement('span');
-        tag.className = 'tag';
-        tag.appendChild(document.createTextNode(city.nome + ' '));
-        const btn = document.createElement('button');
-        btn.setAttribute('aria-label', 'Remover ' + city.nome);
-        btn.dataset.id = city.id;
-        btn.textContent = '×';
-        btn.addEventListener('click', () => removeCity(city.id));
-        tag.appendChild(btn);
-        tagsWrap.appendChild(tag);
-      });
-    }
-
-    acaoSel.addEventListener('change', () => {
-      customWrap.style.display = acaoSel.value === 'custom' ? 'flex' : 'none';
-    });
-
-    async function fetchPrevisao() {
-      const acao = getAcao();
-      if (!acao) { showToast('Informe a ação antes de buscar.'); return; }
-      if (!state.selected.length) { showToast('Selecione ao menos uma cidade.'); return; }
-      state.loading = true;
-      updateBtn();
-      btnBuscar.innerHTML = '<svg class="spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Buscando…';
-      renderSkeleton(state.selected.length);
-      try {
-        const res = await fetch('/previsao/scrap/cwb?acao=' + encodeURIComponent(acao), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(state.selected),
-        });
-        if (!res.ok) {
-          const txt = await res.text().catch(() => '');
-          throw new Error('HTTP ' + res.status + (txt ? ': ' + txt : ''));
-        }
-        const data = await res.json();
-        renderResults(data, acao);
-      } catch(e) {
-        showToast('Erro: ' + e.message, 7000);
-        output.innerHTML = '<div class="state-box error"><div class="icon">⚠️</div><p>' + escapeHtml(e.message) + '</p></div>';
-        resHeader.style.display = 'none';
-      } finally {
-        state.loading = false;
-        updateBtn();
-        btnBuscar.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Buscar previsão';
-      }
-    }
-
-    btnBuscar.addEventListener('click', fetchPrevisao);
-
-    async function salvarLista() {
-      if (!state.selected.length) { showToast('Selecione ao menos uma cidade antes de salvar.'); return; }
-      state.loading = true;
-      updateBtn();
-      const iconeOriginal = btnSalvar.innerHTML;
-      btnSalvar.innerHTML = '<svg class="spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Salvando…';
-      try {
-        const res = await fetch('/cidades/salvar/lista', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(state.selected),
-        });
-        if (!res.ok) {
-          const txt = await res.text().catch(() => '');
-          throw new Error('HTTP ' + res.status + (txt ? ': ' + txt : ''));
-        }
-        showToast('✅ Lista salva com sucesso! (' + state.selected.length + ' cidade' + (state.selected.length > 1 ? 's' : '') + ')', 4000, true);
-      } catch(e) {
-        showToast('Erro ao salvar: ' + e.message, 7000);
-      } finally {
-        state.loading = false;
-        updateBtn();
-        btnSalvar.innerHTML = iconeOriginal;
-      }
-    }
-
-    btnSalvar.addEventListener('click', salvarLista);
-
-    async function carregarLista() {
-      state.loading = true;
-      updateBtn();
-      btnCarregar.disabled = true;
-      const iconeOriginal = btnCarregar.innerHTML;
-      btnCarregar.innerHTML = '<svg class="spin" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Carregando…';
-      try {
-        const res = await fetch('/cidades/lista');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const lista = await res.json();
-        if (!lista || !lista.length) {
-          showToast('Nenhuma cidade salva encontrada.', 4000);
-          return;
-        }
-        const idsJaSelecionados = new Set(state.selected.map(c => c.id));
-        const novas = lista.filter(c => !idsJaSelecionados.has(c.id));
-        state.selected = [...state.selected, ...novas];
-        renderTags();
-        updateBtn();
-        showToast('📥 ' + lista.length + ' cidade' + (lista.length > 1 ? 's' : '') + ' carregada' + (lista.length > 1 ? 's' : '') + (novas.length < lista.length ? ' (' + (lista.length - novas.length) + ' já estavam selecionadas)' : '') + '.', 4000, true);
-      } catch(e) {
-        showToast('Erro ao carregar lista: ' + e.message, 7000);
-      } finally {
-        state.loading = false;
-        updateBtn();
-        btnCarregar.innerHTML = iconeOriginal;
-      }
-    }
-
-    btnCarregar.addEventListener('click', carregarLista);
-
-    function renderSkeleton(n) {
-      resHeader.style.display = 'none';
-      output.innerHTML = '<div class="skeleton-grid">' +
-        Array.from({length: n}, () =>
-          '<div class="skeleton-card"><div class="skel skel-title"></div><div class="skel skel-row w80"></div><div class="skel skel-row w60"></div><div class="skel skel-row w70"></div><div class="skel skel-row w80"></div></div>'
-        ).join('') + '</div>';
-    }
-
-    const ICONS = { sol:'☀️', ensolarado:'☀️', poucas_nuvens:'🌤️', parcialmente_nublado:'⛅', nublado:'☁️', muito_nublado:'☁️', chuva:'🌧️', chuva_fraca:'🌦️', tempestade:'⛈️', neve:'❄️', neblina:'🌫️' };
-
-    function getWeatherIcon(condicao, idx) {
-      const k = (condicao||'').toLowerCase().replace(/\s+/g,'_');
-      for (const [key, v] of Object.entries(ICONS)) { if (k.includes(key)) return v; }
-      if (idx <= 1) return '☀️';
-      if (idx <= 3) return '⛅';
-      if (idx <= 5) return '🌧️';
-      return '⛈️';
-    }
-
-    function parseProbNum(prob) {
-      const n = parseInt((prob||'').replace(/\D/g,''), 10);
-      return isNaN(n) ? 0 : Math.min(n, 100);
-    }
-
-    function renderResults(cities, acao) {
-      if (!cities || !cities.length) {
-        resHeader.style.display = 'none';
-        output.innerHTML = '<div class="state-box"><div class="icon">🔍</div><p>Nenhum dado retornado pela API.</p></div>';
-        return;
-      }
-      resHeader.style.display = 'flex';
-      resCount.textContent = cities.length + ' cidade' + (cities.length > 1 ? 's' : '');
-      resMeta.textContent = 'Ação: ' + acao + ' · ' + new Date().toLocaleTimeString('pt-BR');
-      output.innerHTML = '<div class="city-grid">' + cities.map(renderCard).join('') + '</div>';
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const card = btn.closest('.city-card');
-          const panel = btn.dataset.panel;
-          card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-          card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-          btn.classList.add('active');
-          card.querySelector('[data-id="' + panel + '"]').classList.add('active');
-        });
-      });
-    }
-
-    function renderCard(city) {
-      const dias = city.dias || [];
-      const safeCityId = escapeHtml(city.id);
-      const tabs = dias.map((d,i) =>
-        '<button class="tab-btn' + (i===0?' active':'') + '" data-panel="' + safeCityId + '-' + i + '">' + escapeHtml(d.dia||'Dia '+(i+1)) + '</button>'
-      ).join('');
-      const panels = dias.map((d,i) => {
-        const icon = getWeatherIcon(d.condicao, d.iconeIndex);
-        const pn = parseProbNum(d.prob);
-        return '<div class="tab-panel' + (i===0?' active':'') + '" data-id="' + safeCityId + '-' + i + '">' +
-          '<div class="weather-main"><div class="weather-icon">' + icon + '</div>' +
-          '<div class="temp-range"><span class="temp-max">' + escapeHtml(d.maxima??'—') + '°C</span>' +
-          '<span class="temp-min">' + escapeHtml(d.minima??'—') + '°C</span>' +
-          '<span class="condicao">' + escapeHtml(d.condicao||'—') + '</span></div></div>' +
-          '<div class="details-grid">' +
-          '<div class="detail-item"><div class="detail-label">💧 Precipitação</div><div class="detail-value">' + escapeHtml(d.milimetros||'—') + ' mm</div></div>' +
-          '<div class="detail-item"><div class="detail-label">💨 Vento</div><div class="detail-value">' + escapeHtml(d.vento||'—') + '</div></div>' +
-          '</div>' +
-          (pn > 0 ? '<div class="prob-bar-wrap"><div class="prob-bar-label"><span>Prob. chuva</span><span>' + escapeHtml(d.prob||'0%') + '</span></div><div class="prob-bar-bg"><div class="prob-bar-fill" style="width:' + pn + '%"></div></div></div>' : '') +
-          '</div>';
-      }).join('');
-      return '<div class="city-card"><div class="city-header"><h3>' + escapeHtml(city.nome||'Cidade') + '</h3><span class="city-id">#' + safeCityId + '</span></div>' +
-        (dias.length ? '<div class="tabs">' + tabs + '</div><div class="tab-panels">' + panels + '</div>' : '<div class="tab-panels" style="color:var(--muted);font-size:.85rem;">Sem dados disponíveis.</div>') +
-        '</div>';
-    }
-
-    loadCities();
-  </script>
+  <script type="module" src="Scripts/index.js"></script>
 </body>
 </html>

@@ -32,6 +32,7 @@ public class PrevisaoServiceCwb {
     public List<Cidade> servico(String acao, List<CidadeDto> cidadesSelecionadas) throws InterruptedException, IOException {
 
         List<Cidade> cidades = filtro.selecionarIds(cidadesSelecionadas);
+
         WebDriver driver = DriverFactory.getDriver();
 
         try {
@@ -41,7 +42,7 @@ public class PrevisaoServiceCwb {
 
                 System.out.println("Cidade: " + cidade.getNome() + " (" + cidade.getId() + ")");
 
-                Thread.sleep(15000); // espera a página carregar
+                Thread.sleep(10000); // espera a página carregar
 
                 int[] max = dados.maximas(driver);
                 int[] min = dados.minimas(driver);
